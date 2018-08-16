@@ -83,6 +83,61 @@ visibility: hidden;
 #msgErro{
 	width:100%;
 }
+#bts{
+	position:absolute;
+	z-index:1000;
+	top:80px;
+	right:10px;
+}
+#dir{
+		margin: 0 auto;
+    width: 50%; /* Valor da Largura */
+
+}
+.rodape{
+	position:absolute;
+    bottom:0;
+    width:100%;
+	z-index:1100;
+}
+.btCSD {
+	-moz-box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	background-color:#63b8ee;
+	-webkit-border-top-left-radius:37px;
+	-moz-border-radius-topleft:37px;
+	border-top-left-radius:37px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:37px;
+	-moz-border-radius-bottomright:37px;
+	border-bottom-right-radius:37px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0;
+	border:1px solid #3866a3;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:14px;
+	font-weight:bold;
+	font-style:italic;
+	height:23px;
+	line-height:23px;
+	width:74px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 3px #7cacde;
+}.btCSD:hover {
+	background-color:#468ccf;
+}.btCSD:active {
+	position:relative;
+	top:1px;
+}
+/* This button was generated using CSSButtonGenerator.com */
 
 /* The Modal (background) */
 .modallogin {
