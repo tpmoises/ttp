@@ -36,10 +36,10 @@ var app = {
 		try{
 			
 		//app.receivedEvent('deviceready');
-	 
+	  
 		var iab = cordova.InAppBrowser;	
-          // alert(iab);		
-	       iab.open('https://teletransporte.net', '_self','location=no');  	
+        //  alert('aqui');		
+	     //  iab.open('https://teletransporte.net', '_self','location=no');  	
 		}catch(e){alert(e.message)}
         
     },

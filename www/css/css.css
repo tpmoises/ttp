@@ -13,8 +13,16 @@ z-index:999;}
 
 #btDestino{	position:relative ;	
 top:-150px;/*Sobe 100px - comportamento do posicionamento relativo*/	
-width:300px; 	margin-left:auto;	margin-right:auto;	height:50px; 	
+width:300px; 	margin-left:auto;	margin-right:auto;	height:50px; 
+text-align: center;	
 z-index:999;   }
+
+.rodape{
+	position:absolute;
+   /* bottom:-40; */
+    width:100%;
+	z-index:1100;
+}
 
 .btn-info{	color: #0a0000;    background-color: #c1d4e6;    
 border-color: #46b8da;	top:0px;}
@@ -94,12 +102,7 @@ visibility: hidden;
     width: 50%; /* Valor da Largura */
 
 }
-.rodape{
-	position:absolute;
-    bottom:0;
-    width:100%;
-	z-index:1100;
-}
+
 .btCSD {
 	-moz-box-shadow:inset 0px 1px 0px 0px #bee2f9;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #bee2f9;
