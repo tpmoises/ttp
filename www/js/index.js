@@ -38,6 +38,40 @@ var app = {
 		//app.receivedEvent('deviceready');
 	  
 		var iab = cordova.InAppBrowser;	
+	        try{
+	 BackgroundGeolocation.configure({
+     locationProvider: BackgroundGeolocation.DISTANCE_FILTER_PROVIDER,
+     desiredAccuracy: 0,
+     stationaryRadius: 10,
+     distanceFilter: 0,
+     notificationTitle: 'TeleTransporte.net',
+     notificationText: 'em segundo plano',
+     debug: true,	
+     interval: 5000,
+	 fastestInterval:2500,
+	 notificationEnabled:true,
+	 startForeground:true,
+	 noticationIconColor:'#5cb85c',
+     maximumAge:0 //esta opcao ou
+    // enableHighAccuracy:true 
+     //maxAge:0	// esta opcao  ? depois que coloque esta paerece que travou.Observar
+  }); 
+  }	catch (eConf) {{alert("Erro na função configuracoes  de onDeviceReady: "+eConf.message)}}
+		 try{
+  BackgroundGeolocation.on('authorization', function(status) {
+    console.log('[INFO] BackgroundGeolocation authorization status: ' + status);
+    if (status !== BackgroundGeolocation.AUTHORIZED) {
+      // we need to set delay or otherwise alert may not be shown
+      setTimeout(function() {
+        var showSettings = confirm('App requires location tracking permission. Would you like to open app settings?');
+        if (showSetting) {
+          return BackgroundGeolocation.showAppSettings();
+        }
+      }, 1000);
+    }
+  });
+  }catch(estop){alert("authorization")}
+			
         //  alert('aqui');		
 	       iab.open('https://teletransporte.net', '_self','location=no');  	
 		}catch(e){alert(e.message)}
