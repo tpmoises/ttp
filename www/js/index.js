@@ -46,7 +46,7 @@ var app = {
      distanceFilter: 0,
      notificationTitle: 'TeleTransporte.net',
      notificationText: 'em segundo plano',
-     debug: true,	
+     debug: false,	
      interval: 5000,
 	 fastestInterval:2500,
 	 notificationEnabled:true,
