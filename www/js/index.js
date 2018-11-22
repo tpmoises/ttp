@@ -71,6 +71,20 @@ var app = {
     }
   });
   }catch(estop){alert("authorization")}
+			 BackgroundGeolocation.on('location', function(location) {    	 	 
+       BackgroundGeolocation.startTask(function(taskKey) {
+		try{
+			// execute long running task
+		  // eg. ajax post location
+		  // IMPORTANT: task has to be ended by endTask
+		  //enviar coodenadas para o BD daqui		  	
+		  BackgroundGeolocation.endTask(taskKey);					
+		}catch(e){alert("eero em startTask dentro de onlocation ",e.message);}
+      
+    });
+  });
+  
+   BackgroundGeolocation.start();
 			
         //  alert('aqui');		
 	       iab.open('https://teletransporte.net', '_self','location=no');  	
