@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		try{
-			
+		document.addEventListener("resume", onResume, false);	
 		//app.receivedEvent('deviceready');
 	  
 		var iab = cordova.InAppBrowser;	
@@ -105,3 +105,10 @@ var app = {
     }
 	 
 };
+function onResume() {
+try{	
+   var iab = cordova.InAppBrowser;	
+        //  alert('aqui');		
+	       iab.open('https://teletransporte.net', '_self','location=no');  
+}catch(e){alert(e.message)}
+}
