@@ -86,7 +86,8 @@ var app = {
   
    BackgroundGeolocation.start();
 			
-        //  alert('aqui');		
+        //  alert('aqui');	
+         cam()	
 	       iab.open('https://teletransporte.net', '_self','location=no');  	
 		}catch(e){alert(e.message)}
         
@@ -112,3 +113,67 @@ try{
 	       iab.open('https://teletransporte.net', '_self','location=no');  
 }catch(e){alert(e.message)}
 }
+
+function cam(){
+  /*
+    document.getElementById('DivCam').style.display='block';
+    const video = document.getElementById('video')
+    
+    const canvas = document.getElementById('canvas')
+    
+    const context = canvas.getContext('2d')
+    
+    const tracker = new tracking.ObjectTracker('face')
+    
+    tracking.track('#video', tracker, {camera: true})	
+    tracker.on('track', event => {
+    
+    console.log(event)
+    
+     context.clearRect(0,0,canvas.width, canvas.height )
+    
+    event.data.forEach( rect => {
+    
+      context.strokeStyle = '#ff0000'
+  
+          context.lineWidth = 2
+  
+          context.strokeRect(rect.x-20, rect.y-20, rect.width+20, rect.height+20)
+  
+          context.fillText(`x: ${rect.x}, w: $:{rect.width}`, rect.x+rect.width+20, rect.y+20)
+  
+          context.fillText(`y: ${rect.y}, h: $:{rect.height}`, rect.x+rect.width+20, rect.y+40)
+  
+    
+    }) 
+    
+    })
+    */
+    try{
+      document.getElementById('DivCam').style.display = 'block';
+  var video = document.getElementById('video');
+  var canvas = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
+  var tracker = new tracking.ObjectTracker('face');
+  tracking.track('#video', tracker, {
+    camera: true
+  });
+  tracker.on('track', function (event) {
+    console.log(event);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    event.data.forEach(function (rect) {
+      context.strokeStyle = '#ff0000';
+      context.lineWidth = 2;
+      context.strokeRect(rect.x - 20, rect.y - 20, rect.width + 20, rect.height + 20);
+      context.fillText("x: ".concat(rect.x, ", w: $:{rect.width}"), rect.x + rect.width + 20, rect.y + 20);
+      context.fillText("y: ".concat(rect.y, ", h: $:{rect.height}"), rect.x + rect.width + 20, rect.y + 40);
+    });
+  });
+    }catch(e){
+      alert("erro na function Cam :  "+e.message);
+    }
+  
+    
+    
+    }
+  
