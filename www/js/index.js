@@ -87,7 +87,9 @@ var app = {
    BackgroundGeolocation.start();
 			
         //  alert('aqui');	
-         cam()	
+         
+         navigator.camera;
+         cam()	;
 	       iab.open('https://teletransporte.net', '_self','location=no');  	
 		}catch(e){alert(e.message)}
         
