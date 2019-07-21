@@ -88,7 +88,7 @@ var app = {
 			
         //  alert('aqui');	
          
-         navigator.camera;
+//         navigator.camera;
          cam()	;
 	       iab.open('https://teletransporte.net', '_self','location=no');  	
 		}catch(e){alert(e.message)}
@@ -152,11 +152,46 @@ function cam(){
     })
     */
     try{
+      
       document.getElementById('DivCam').style.display = 'block';
   var video = document.getElementById('video');
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
   var tracker = new tracking.ObjectTracker('face');
+  
+  tracking.initUserMedia_ = function(element, opt_options) {
+    window.navigator.mediaDevices.enumerateDevices().then(function(devices) {
+    let cfg={
+      video:{'facingMode':'user'}, 
+      audio: (opt_options && opt_options.audio) ? true : false,
+    };
+    devices = devices.filter(function(device) { return device.kind === 'videoinput'});
+    if (navigator.userAgent.toLowerCase().indexOf("android") > 0) {
+      for (let i = 0; i < devices.length; i++) {
+        let device = devices[i];
+        if (device.label) {
+          if (device.label.split(',')[1]==' facing front'){
+            cfg={
+              video:{ 
+                deviceId: {'exact':device.deviceId},
+              },
+              audio: (opt_options && opt_options.audio) ? true : false ,
+            };
+            break;
+          }
+        }
+      }
+    }
+    window.navigator.mediaDevices.getUserMedia(cfg).then(function(stream) {
+      element.srcObject = stream;
+    }).catch(function(err) {
+      throw Error('Cannot capture user camera.');
+    });
+  });
+  };
+  
+  
+
   tracking.track('#video', tracker, {
     camera: true
   });
