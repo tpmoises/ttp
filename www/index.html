@@ -69,9 +69,30 @@
        <div id="deviceready">
 	     
             <p class="event listening centraliza">Carregando Teletransporte<br>
-			<img src="imgs/espere.gif" alt="Espere carregando Teletransporte"></p>
-            <video id="video" width="320" height="240" preload autoplay loop muted ></video>   
-            <canvas id="canvas" width="320" height="240"></canvas>
+
+                <img src="imgs/espere.gif" alt="Espere carregando Teletransporte"></p>
+                
+            <!-- Modal DivCam -->
+<div id="DivCam" class="modallogin">
+    <div class="modal-content">
+      <div class="modal-header">
+         <h3 class="modal-title" id="tituloLogin">Login</h3>					
+         <button type="button" onclick="document.getElementById('DivCam').style.display='none'" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span></button>				  
+       </div>	  
+      <!-- Modal Content -->
+      <video id="video" width="320" height="240" preload autoplay loop muted ></video>
+    
+    <canvas id="canvas" width="320" height="240"></canvas>
+    <button type="button" onclick="document.getElementById('DivCam').style.display='none'" class="cancelbtn">Fechar</button>
+    
+    
+    
+      <div class="modal-footer">													  
+      </div>
+      </div>
+    </div>
+    
 		  	
 	    <a href='pp.html'>Politica de Privacidade</a>
 	    <br>	   
