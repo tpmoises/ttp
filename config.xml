@@ -22,12 +22,13 @@
 	<preference name="android-targetSdkVersion" value="28" />
 	
     <platform name="android">
-        <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
-        <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
-        <icon density="hdpi" src="www/res/icon/android/drawable-hdpi-icon.png" />
-        <icon density="xhdpi" src="www/res/icon/android/drawable-xhdpi-icon.png" />
-        <icon density="xxhdpi" src="www/res/icon/android/drawable-xxhdpi-icon.png" />
-        <icon density="xxxhdpi" src="www/res/icon/android/drawable-xxxhdpi-icon.png" />
+        <icon density="ldpi" src="res/mipmap-ldpi/icon.png" />
+        <icon density="mdpi" src="res/mipmap-mdpi/icon.png" />
+        <icon density="hdpi" src="res/mipmap-hdpi/icon.png" />
+        <icon density="xhdpi" src="res/mipmap-xhdpi/icon.png" />
+        <icon density="xxhdpi" src="res/mipmap-xxhdpi/icon.png" />
+        <icon density="xxxhdpi" src="res/mipmap-xxxhdpi/icon.png" />
+        
         <splash density="land-ldpi" src="www/res/screen/android/drawable-land-ldpi-screen.png" />
         <splash density="land-mdpi" src="www/res/screen/android/drawable-land-mdpi-screen.png" />
         <splash density="land-hdpi" src="www/res/screen/android/drawable-land-hdpi-screen.png" />
@@ -54,7 +55,7 @@
         
     </platform>
     <platform name="ios">
-        <icon height="57" platform="ios" src="www/res/icon/ios/icon.png" width="57" />
+        <icon height="57" platform="ios" src="www/res/mipmap/icon/icon.png" width="57" />
         <icon height="114" platform="ios" src="www/res/icon/ios/icon@2x.png" width="114" />
         <icon height="40" platform="ios" src="www/res/icon/ios/icon-40.png" width="40" />
         <icon height="80" platform="ios" src="www/res/icon/ios/icon-40@2x.png" width="80" />
