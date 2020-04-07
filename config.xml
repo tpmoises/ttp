@@ -138,8 +138,8 @@
         <variable name="ANDROID_SUPPORT_LIBRARY_VERSION" value="26+" />
 		<variable name="ALWAYS_USAGE_DESCRIPTION" value="App requires background tracking enabled" />
         <variable name="MOTION_USAGE_DESCRIPTION" value="App requires motion detection" />
-        <variable name="ICON" value="@mipmap/icon" />
-        <variable name="SMALL_ICON" value="@mipmap/icon" />
+        <variable name="ICON" value="@mipmap/ic_launcher" />
+        <variable name="SMALL_ICON" value="@mipmap/ic_launcher" />
         <variable name="ACCOUNT_NAME" value="@string/app_name" />
         <variable name="ACCOUNT_LABEL" value="@string/app_name" />
         <variable name="ACCOUNT_TYPE" value="$PACKAGE_NAME.account" />
