@@ -43,23 +43,13 @@
         <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
         
         <config-file parent="application" target="AndroidManifest.xml">
-            <activity android:label="teletransporte.Net" android:name="net.teletransporte.ttpassageiro">
+            <activity android:label="TT Passageiros" android:name="net.teletransporte.ttpassageiro">
                 <intent-filter android:autoVerify="true">
                     <action android:name="android.intent.action.VIEW" />
                     <category android:name="android.intent.category.DEFAULT" />
                     <category android:name="android.intent.category.BROWSABLE" />
-                    <data android:host="teletransporte.net" android:scheme="https" 
-			  android:pathPrefix="/" />
-			
+                    <data android:host="teletransporte.net/index.php" android:scheme="https" />
                 </intent-filter>
-                <intent-filter android:label="App_teletransporte.Net">
-                    <action android:name="android.intent.action.VIEW" />
-                    <category android:name="android.intent.category.DEFAULT" />
-                    <category android:name="android.intent.category.BROWSABLE" />
-                    <!-- Accepts URIs that begin with "example://gizmos” -->
-                    <data android:scheme="app"
-                          android:host="net.teletransporte.ttpassageiro" />
-                 </intent-filter>
             </activity>
         </config-file>
         
