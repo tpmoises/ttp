@@ -110,6 +110,7 @@ var app = {
 			};
 			
 		var par=getParams(window.location.href);	
+		alert(par[0]);	
 	       iab.open('https://teletransporte.net/index.php?fazerAmizadeMotorista='+par[0], '_self','location=no');  	
 		}catch(e){alert(e.message)}
         
@@ -153,7 +154,7 @@ try{
 			};
 			
 		var par=getParams(window.location.href);	
-	
+	       alert(par[0]);
 	       iab.open('https://teletransporte.net/index.php?fazerAmizadeMotorista='+par[0], '_self','location=no');  
 }catch(e){alert(e.message)}
 }
