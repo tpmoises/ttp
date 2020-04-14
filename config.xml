@@ -44,8 +44,8 @@
         
 	    
 	    
-        <config-file parent="application/activity" target="AndroidManifest.xml">
-            <activity android:label="teletransporte.Net" android:name="net.teletransporte.ttpassageiro.TTP">
+        <config-file parent="application" target="AndroidManifest.xml">
+            <activity android:label="teletransporte.Net" android:name="net.teletransporte.ttpassageiro">
                 <intent-filter android:autoVerify="true">
                     <action android:name="android.intent.action.VIEW" />
                     <category android:name="android.intent.category.DEFAULT" />
