@@ -44,7 +44,7 @@
         
 	    
 	    
-        <config-file parent="/manifest/application/activity" target="AndroidManifest.xml">  
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">  
 		<activity
         android:name="net.teletransporte.ttpassageiro.ttp" 
         android:label="TTP" >
