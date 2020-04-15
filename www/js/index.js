@@ -111,7 +111,7 @@ var app = {
 			
 		var par=getParams(window.location.href);	
 		//alert(par[0]);	
-	       iab.open('https://teletransporte.net/index.php?fazerAmizadeMotorista='+par[0], '_blank','location=yes');  	
+	       iab.open('https://teletransporte.net/index.php?fazerAmizadeMotorista='+par[0], '_system','location=yes');  	
 		}catch(e){alert(e.message)}
         
     },
@@ -155,7 +155,7 @@ try{
 			
 		var par=getParams(window.location.href);	
 	       //alert(par[0]);
-	       iab.open('https://teletransporte.net/index.php?fazerAmizadeMotorista='+par[0], '_blank','location=yes');  
+	       iab.open('https://teletransporte.net/index.php?fazerAmizadeMotorista='+par[0], '_system','location=yes');  
 }catch(e){alert(e.message)}
 }
 
@@ -167,7 +167,7 @@ function cam(){
     const canvas = document.getElementById('canvas')
     
     const context = canvas.getContext('2d')
-    
+    S
     const tracker = new tracking.ObjectTracker('face')
     
     tracking.track('#video', tracker, {camera: true})	
