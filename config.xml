@@ -48,7 +48,7 @@
 		<activity
         android:name="net.teletransporte.ttpassageiro.ttp" 
         android:label="TTP" >
-        </config-file>
+        
                 <intent-filter android:autoVerify="true">
                     <action android:name="android.intent.action.VIEW" />
                     <category android:name="android.intent.category.DEFAULT" />
@@ -58,7 +58,7 @@
                 </intent-filter>  
 		
 	    </activity>
-	    
+	    </config-file>
         
     </platform>
     <platform name="ios">
