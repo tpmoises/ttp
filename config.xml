@@ -46,8 +46,8 @@
 	    
         <config-file parent="/manifest/application/activity" target="AndroidManifest.xml">  
 		<activity
-        android:name="com.example.android.GizmosActivity"
-        android:label="@string/title_gizmos" >
+        android:name="net.teletransporte.ttpassageiro.ttp" 
+        android:label="TTP" >
         </config-file>
                 <intent-filter android:autoVerify="true">
                     <action android:name="android.intent.action.VIEW" />
