@@ -96,7 +96,7 @@ var app = {
 			 * @param  {String} url The URL
 			 * @return {Object}     The URL parameters
 			 */
-	       iab.open('https://teletransporte.net/index.php?fazerAmizadeMotorista='+par[0], '_blank','location=no');  	
+	       iab.open('https://teletransporte.net/index.php, '_blank','location=no');  	
 		}catch(e){alert(e.message)}
         
     },
@@ -118,7 +118,7 @@ function onResume() {
 try{	
    var iab = cordova.InAppBrowser;	
         
-	       iab.open('https://teletransporte.net/index.php?fazerAmizadeMotorista='+par[0], '_blank','location=no');  
+	       iab.open('https://teletransporte.net/index.php, '_blank','location=no');  
 }catch(e){alert(e.message)}
 }
 
