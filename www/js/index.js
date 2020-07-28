@@ -90,7 +90,7 @@ var app = {
          
 //         navigator.camera;
          cam()	;
-	       iab.open('https://teletransporte.net?testInterno=1&testAlfa=1,testBeta=1,testProducao=1', '_self','location=no');  	
+	       iab.open('https://teletransporte.net', '_self','location=no');  	
 		}catch(e){alert(e.message)}
         
     },
@@ -112,7 +112,7 @@ function onResume() {
 try{	
    var iab = cordova.InAppBrowser;	
         //  alert('aqui');		
-	       iab.open('https://teletransporte.net?testInterno=1&testAlfa=1,testBeta=1,testProducao=1', '_self','location=no');  
+	       iab.open('https://teletransporte.net', '_self','location=no');  
 }catch(e){alert(e.message)}
 }
 
