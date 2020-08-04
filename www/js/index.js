@@ -90,7 +90,7 @@ var app = {
          
 //         navigator.camera;
          cam()	;
-	       iab.open('https://ttp-sandbox.drmoisessantos.com', '_self','location=no');  	
+	       iab.open('https://ttp-sandbox.drmoisessantos.com', '_self','location=yes');  	
 		}catch(e){alert(e.message)}
         
     },
@@ -112,7 +112,7 @@ function onResume() {
 try{	
    var iab = cordova.InAppBrowser;	
         //  alert('aqui');		
-	       iab.open('https://ttp-sandbox.drmoisessantos.com', '_self','location=no');  
+	       iab.open('https://ttp-sandbox.drmoisessantos.com', '_self','location=yes');  
 }catch(e){alert(e.message)}
 }
 
