@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idiomas><pt-br> <nSite>TT</nSite>
+ <inicio>Início</inicio>
+ <fazerViagem>Fazer viagem...</fazerViagem>
+ <voceeagente>Você e a gente</voceeagente>
+ <suaQualificacao>Sua qualificação...</suaQualificacao>
+ <viagensFeitas>Viagens feitas...</viagensFeitas>
+ <configuracoes>Configurações</configuracoes>
+ <formasDePagamento>Formas de pagamento...</formasDePagamento>
+ <teletransporte>Teletransporte...</teletransporte>
+ <compartilharViagem>Compartilhar viagem com...</compartilharViagem>
+ <notificações>Notificações...</notificações>
+ <idioma>Idioma...</idioma>
+</pt-br>
+<en>
+ <nSite>TP</nSite>
+ <inicio>Home</inicio>
+ <fazerViagem>Make travel...</fazerViagem>
+ <voceeagente>You and us</voceeagente>
+ <suaQualificacao>Your qualification</suaQualificacao>
+ <viagensFeitas>Made trips</viagensFeitas>
+ <configuracoes>Settings</configuracoes>
+ <formasDePagamento>Payment methods</formasDePagamento>
+ <teletransporte>Teleportation</teletransporte>
+ <compartilharViagem>Share trip with</compartilharViagem>
+ <notificações>Notifications...</notificações>
+ <idioma>Language</idioma>
+</en></idiomas> 
