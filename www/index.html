@@ -261,7 +261,7 @@ function removeSessao(id) {
                  },
                   function(r) {
                                 criaAtualizaSessao("uidNuvem",response.id)
-                                window.location.href = 'https://ttp-sandbox.drmoisessantos.com';
+                                window.location.href = 'https://teletransporte.net';
                 }); 
                }else{
                   // alert(response.id);
@@ -281,7 +281,7 @@ function removeSessao(id) {
  
      FB.Event.subscribe('auth.logout', function(response){ //Ocorre quando loga via facebook     
         removeSessao("uidNuvem");
-        window.location.href = 'https://ttp-sandbox.drmoisessantos.com';
+        window.location.href = 'https://teletransporte.net';
   //    FB.login(function(response) {
             // Original FB.login code
        //     }, { auth_type: 'reauthenticate' });
@@ -299,7 +299,7 @@ function removeSessao(id) {
          } else {
              if (verificaExistenciaSessao("uidNuvem")){
                   removeSessao("uidNuvem");
-                   window.location.href = 'https://ttp-sandbox.drmoisessantos.com';
+                   window.location.href = 'https://teletransporte.net';
                   
              }
              console.log('is not logged');
