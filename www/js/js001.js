@@ -30,7 +30,7 @@ var codPromocao=null;
 var codAlfanumericoPromocao=null;
 var regrasPromocao=null;
 var dataFinalPromocao=null;
-var urlBaseApp='https://ttp-sandbox.drmoisessantos.com/';//termina em /
+var urlBaseApp='https://teletransporte.net/';//termina em /
 
 var idUsuarioFace=0;//gabiarra
 
@@ -1986,7 +1986,7 @@ function fazCadastroPassageiro() {
 function verTelaLogin() {
     //fFB();
     document.getElementById('id01').style.display = 'block';
-    aguardaTempoFazAcao(30,function(){window.location.href='https://ttp-sandbox.drmoisessantos.com';})
+    aguardaTempoFazAcao(30,function(){window.location.href='https://teletransporte.net';})
     
 function fFB() {
 try {
@@ -2153,7 +2153,7 @@ window.fbAsyncInit = function() {
 }
    // fFB();
      
-   // aguardaTempoFazAcao(300, function(){window.location.href='https://ttp-sandbox.drmoisessantos.com';},'contadorRegressivo');//ex.: 30,window.location.reload(true);
+   // aguardaTempoFazAcao(300, function(){window.location.href='https://teletransporte.net';},'contadorRegressivo');//ex.: 30,window.location.reload(true);
    // resetaSeLogout();
 
 
@@ -7784,9 +7784,9 @@ function escolheMotoristaEspecfico(evento, tipoCHAMADA, tipoCORRIDA, codCorridaJ
                            url += "&codPromocao1=" + 0; 
                        }
                         
-                         url += "&url_dominio_app_passageiro=" + "https://ttp-sandbox.drmoisessantos.com";//ou quando for código producao/beta https://teletransporte.net
+                         url += "&url_dominio_app_passageiro=" + "https://teletransporte.net";//ou quando for código producao/beta https://teletransporte.net
 
-                       //url += "&url_dominio_app_motorista=" + "https://ttp-sandbox.drmoisessantos.com";//ou quando for código producao/beta http
+                       //url += "&url_dominio_app_motorista=" + "https://teletransporte.net";//ou quando for código producao/beta http
 
                         try {
                             //urlBaseApp termina em /
