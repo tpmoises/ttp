@@ -34,9 +34,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		try{
-		 window.plugins.insomnia.keepAwake(); //plugun que faz app não apagar tela
-                 //window.plugins.insomnia.allowSleepAgain() funçao apar autorizar voltar ao modo ocioso
-			
 		document.addEventListener("resume", onResume, false);	
 		//app.receivedEvent('deviceready');
 	  
@@ -59,7 +56,7 @@ var app = {
     // enableHighAccuracy:true 
      //maxAge:0	// esta opcao  ? depois que coloque esta paerece que travou.Observar
   }); 
-  }	catch (eConf) {{alert("Erro na função configuracoes  de onDeviceReady: "+eConf.message)}}
+  }	catch (eConf) {{alert("Erro na funÃ§Ã£o configuracoes  de onDeviceReady: "+eConf.message)}}
 		 try{
   BackgroundGeolocation.on('authorization', function(status) {
     console.log('[INFO] BackgroundGeolocation authorization status: ' + status);
@@ -93,7 +90,7 @@ var app = {
          
 //         navigator.camera;
          cam()	;
-	       iab.open('https://teletransporte.net, '_self','location=no');  	
+	       iab.open('https://teletransporte.net', '_self','location=no');  	
 		}catch(e){alert(e.message)}
         
     },
@@ -106,7 +103,7 @@ var app = {
 	   //window.open = cordova.InAppBrowser.open();
        // listeningElement.setAttribute('style', 'display:none;');
        // receivedElement.setAttribute('style', 'display:block;');
-        //window.location.replace("https://ttp-sandbox.drmoisessantos.com");
+        //window.location.replace("https://teletransporte.net");
        // console.log('Received Event: ' + id);
     }
 	 
@@ -216,3 +213,4 @@ function cam(){
     
     
     }
+  
