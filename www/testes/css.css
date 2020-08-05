@@ -1,0 +1,29 @@
+/* Wrapper - a altura e a largura devem ser ajustadas à sua necessidade: */
+
+.wrapper {
+  overflow: hidden;
+  position: relative;
+  height: 200px;
+  width: 400px;
+  margin: 0 auto;
+}
+/* Wrapper interno - Para anexar imagens a: */
+.inner {
+  height: 200px;
+  width: auto;
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+}
+/* Wrappers de transição - Usado para transição de entrada e saída de imagens : */
+
+.holder, .in, .hidden {
+  position: absolute;
+}
+
+/* Ocultar imagens pré-carregadas: */
+
+.hidden {
+  display: none;
+}
+
