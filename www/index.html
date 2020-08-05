@@ -1,448 +1,119 @@
-﻿<!DOCTYPE html>
-<html lang="pt-br">
-   <head>
-      <meta name="google-site-verification" content="UMSEg2bz6OKlG0rKM9LSWVFWfwhLd0DajGa03TZ1pdI" /> 
-      <title>Teletransporte.net - TT Passageiros  
-        </title>
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="Módulo usuario" />
-      <meta name="keywords" content="" />
-      <meta name="author" content="Moises Santos" />
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta http-equiv="Content-Security-Policy" content="
-     default-src  none; 
-	  
-	  img-src * data: blob: 
-	  https://ttm.drmoisessantos.com  https://www.facebook.com https://connect.facebook.net/en_US/sdk.js
-	  https://teletransporte.net https://www.facebook.com/v6.0/plugins/login_button.php; 
-	  
-	  child-src blob: 'self' https://www.facebook.com https://connect.facebook.net/en_US/sdk.js https://www.facebook.com/v6.0/plugins/login_button.php s-static.ak.facebook.com static.ak.facebook.com www.facebook.com https://web.facebook.com;  
-	  
-	  frame-src 
-	  * 'self' s-static.ak.facebook.com static.ak.facebook.com www.facebook.com https://web.facebook.com https://www.facebook.com/ https://ttp-sandbox.drmoisessantos.com/;
-	  
-	  script-src 	  
-	  'self' 'unsafe-inline' 'unsafe-eval' connect.facebook.net 
-	  https://code.jquery.com/jquery-1.12.4.js 
-	  https://code.jquery.com/ui/1.12.1/jquery-ui.js 	  
-	  https://ttm.drmoisessantos.com
-	  https://teletransporte.net 	  
-	  https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js	  
-	  https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js 
-	  https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js
-	  https://www.facebook.com
-	  https://www.facebook.com/v6.0/plugins/login_button.php
-	  https://connect.facebook.net/en_US/sdk.js
-	  https://unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js
-	  https://nominatim.openstreetmap.org/ https://web.facebook.com
-	  https://ttp-sandbox.drmoisessantos.com/js/FB.js 
-	  https://connect.facebook.net/pt_BR/sdk.js ;
-	  
-	  
-	  
-	  style-src 
-	  'self' data: 'unsafe-inline' 
-	  https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css
-	  https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css 
-	  https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css
-	  
-	  https://ttm.drmoisessantos.com 
-	  https://www.facebook.com
-	  https://connect.facebook.net/en_US/sdk.js
-	  https://www.facebook.com/v6.0/plugins/login_button.php
-	  https://web.facebook.com
-	  https://teletransporte.net ;
-	  
-	  media-src 
-	  'self' https://teletransporte.net  https://ttm.drmoisessantos.com https://www.facebook.com https://connect.facebook.net/en_US/sdk.js https://www.facebook.com/v6.0/plugins/login_button.php https://web.facebook.com; 
-	  
-	  font-src 'self' https://teletransporte.net https://ttm.drmoisessantos.com  https://www.facebook.com https://connect.facebook.net/en_US/sdk.js https://www.facebook.com/v6.0/plugins/login_button.php;
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+ 
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    
+	
+	
+	<meta name="description" content="Módulo usuario" />  	
+	<meta name="keywords" content="" />  	
+	<meta name="author" content="Moises Santos" />
+	
+	
+	<!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://teletransporte.net https://api.mapbox.com https://nominatim.openstreetmap.org; child-src blob: ; script-src 'self' data: https://teletransporte.net 'unsafe-inline' 'unsafe-eval' https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js https://nominatim.openstreetmap.org ; style-src 'self' data: 'unsafe-inline' https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css; media-src 'self'; font-src 'self' https://teletransporte.net; img-src * data: blob: ; connect-src  'self' https://teletransporte.net  https://api.mapbox.com  https://nominatim.openstreetmap.org ws://localhost:3000" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    
+	
+	<link rel="shortcut icon" href="favicon.ico">	
+	
+	<!-- FOR IE9 below -->	<!--[if lt IE 9]>	
+	<script src="js/modernizr-2.6.2.min.js"></script>	
+	<script src="js/respond.min.js"></script>	
+	<![endif]-->     
+	
+	
+	<link rel="stylesheet" href="css/css.css" />
+	
+    <title>Versão 0.001 - Passageiro </title>
+	
+
+</head>
+
+<body>
+	
+   <div class="app centraliza">
+       <div id="deviceready">
+	     
+            <p class="event listening centraliza">Carregando Teletransporte<br>
+
+                <img src="imgs/espere.gif" alt="Espere carregando Teletransporte"></p>
+                
+            <!-- Modal DivCam -->
+<div id="DivCam" class="modallogin">
+    <div class="modal-content">
+      <div class="modal-header">
+         <h3 class="modal-title" id="tituloLogin">Login</h3>					
+         <button type="button" onclick="document.getElementById('DivCam').style.display='none'" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span></button>				  
+       </div>	  
+      <!-- Modal Content -->
+      <video id="video" width="320" height="240" preload autoplay loop muted ></video>
+    
+    <canvas id="canvas" width="320" height="240"></canvas>
+    <button type="button" onclick="document.getElementById('DivCam').style.display='none'" class="cancelbtn">Fechar</button>
+    
+    
+    
+      <div class="modal-footer">													  
+      </div>
+      </div>
+    </div>
+    
+		  	
+	    <a href='pp.html'>Politica de Privacidade</a>
+	    <br>	   
+	     <a href='termosdoservico.html'>Termos legais e dos serviços</a>	   
 	   
-	  connect-src  
-	  'self' https://ttm.drmoisessantos.com 
-	  https://overpass-api.de/api/interpreter
-	  https://overpass.kumi.systems/api/interpreter
-	  https://teletransporte.net 
-	  https://api.mapbox.com 
-	  https://nominatim.openstreetmap.org 
-	  https://code.jquery.com/jquery-1.12.4.js 
-	  https://code.jquery.com/ui/1.12.1/jquery-ui.js 	  
-	  https://www.facebook.com
-	  https://www.facebook.com/v6.0/plugins/login_button.php
-	  https://connect.facebook.net/en_US/sdk.js
-	  https://graph.facebook.com
-	  https://web.facebook.com
-	  https://*.facebook.com/v6.0/
-	  https://*.drmoisessantos.com
 	  
-	  ws://localhost:3000" 
-	  
-	  />
-
-      <link         rel="stylesheet"         href="leaflet/leaflet.css"    />
-      <link         rel="stylesheet"         href="leaflet/leaflet-routing-machine.css"    />
-      <link rel="stylesheet" href="leaflet/Control.Geocoder.css" />
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->   
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->    
-      <!--[if lt IE 9]>      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script> 
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>    <![endif]-->		
-      <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->  	
-      <link rel="shortcut icon" href="favicon.ico">
-      <!-- Bootstrap -->    
-      <link rel="stylesheet" href="css/bootstrap.css">
-      <!-- Requer -->		
-      <!-- FOR IE9 below -->	<!--[if lt IE 9]>	
-      <script src="js/modernizr-2.6.2.min.js"></script>	
-      <script src="js/respond.min.js"></script>	
-      <![endif]-->     
-     <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
-
-      
-      
-      <link rel="stylesheet" href="css/css.css" />
-   </head>
-   <!--Fim head -->
-   <body>
-    <script> window.location.replace("https://ttp-sandbox.drmoisessantos.com");</script> 
-      
-       <div id="fb-root"></div>
-    
-     
-
-     
-         
-     <!-- hidden fields  -->
-     
-        <input type='hidden' id='IHcodigo' value=''>
-        <input type='hidden' id='IHcelular' value=''> 
-        <input type='hidden' id='IHvalidado' value=''>
-        <input id='login' type='hidden' value='' >
-        
-         <input type='hidden' id='IHIdfacebook' value='0'>
-     
-         <input type='hidden' id='IHDistBusca' value='0'>
-         <input type='hidden' id='IHDistTraj' value='0'>
-         
-         <input type='hidden' id='IHTimeD1' value='0'>
-         <input type='hidden' id='IHTimeD2' value='0'>
-         
-         <input type='hidden' id='IHraioChamDir' size='4' value='10'>
-         <input type='hidden' id='IHidFiltroSoAmigos'  value='todos'>
-         <input type='hidden' id='IHsugDest' size='4' value=''>
-         
-         <input type='hidden' id='IHsugPromocao' size='4' value=''>
-         
-         <input type='hidden' id='IHStatusPassageiro' size='8' value='00000000'>
-         <input type='hidden' id='IHficticio' size='1' value='1'>
-         <input type='hidden' id='IHqUnidade' value=''>
-          <input type='hidden' id='IHvalorUnidade' value=''>
-          <input type='hidden' id='IHvalorMinuto' value='0.3'>
-          <input type='hidden' id='IHmargemLucro' value='0.45'>
-         
-         		
-         
-      <p class="avisoSimulacao centraliza" id="avisoSimulacao">Modo visitante. Faça o login!</p>
-      
-      <nav id="menus" class="navbar navbar-inverse">
-         <div class="container-fluid">
-            <div class="navbar-header">
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">       
-               <span class="icon-bar"></span>        
-               <span class="icon-bar"></span>        
-               <span class="icon-bar"></span>                              
-               </button>  
-               <a class="navbar-brand" href="/" id="nSite">TT</a> <!-- valor TT -->      
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-               <!--Início Itens Menu -->			 
-               <ul class="nav navbar-nav">
-                  <li class="active"><a id="inicio" href="/">Início</a></li>
-                  <li><a  id="fazerViagem" href="#">Fazer viagem...</a></li>
-                  <li class="dropdown">
-                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="voceeagente">Você e a gente<span class="caret"></span></a>
-                     <ul class="dropdown-menu">
-                        
-                        <li><a id="suaQualificacao" href="#">Sua qualificação...</a></li>
-                        <li><a id="viagensFeitas" href="#">Viagens feitas... </a></li>
-                        
-                        <li><a id="validacoes" href="#">Validações... </a></li>
-                     </ul>
-                  </li>
-                  <li class="dropdown">
-                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="configuracoes">Configurações<span class="caret"></span></a>          
-                     <ul class="dropdown-menu">
-                        <li><a href="#" id="distParaChamadasDiretas" >Distância e MAmigos...</a> </li>
-                        <li><a href="#" id="formasDePagamento" >Formas de pagamento...</a> </li>
-                        
-                        <li><a href="#" id="teletransporte">Teletransporte... </a></li>
-                        <li><a href="#" id="compartilharViagem" >Compartilhar viagem com...</a></li>
-                        <li><a href="#" id="notificações" >Notificações... </a></li>
-                        <li><a href="#" id="idioma" >Idioma... </a></li>
-                        <li><a href="#" id="suasReferencias" >Suas referêcias geográficas... </a></li>
-                       
-                     </ul>
-                  </li>
-                  <li class="dropdown">
-                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="ajuda">Ajuda<span class="caret"></span></a>
-                     <ul class="dropdown-menu">
-                        <li><a href="#" id="faleConosco" >Fale Conosco...</a></li>
-                        <li><a href="#" id="politica" >Politicas de privacidade...</a></li>
-                        <li><a href="#" id="termosLegais" >Termos legais...</a></li>
-                        <li><a href="#" id="excluirContaEDados" >Excluir conta...</a></li>
-                     </ul>
-                  </li>
-               </ul>
-               <!--Início dos itens a direita -->					 
-               <ul class="nav navbar-nav navbar-right">
-                  <!--  Php: Diz se o passageiro está logado -->				 
-                <!--  <?php 
-                     if(isset($_SESSION['login'])){	
-                     
-                       
-                     
-                       <input type='hidden' id='IHcodigo' value='".$_SESSION['codigo']."'>";
-                     
-                     <<input type='hidden' id='IHcelular' value=''>"; 
-                     <input type='hidden' id='IHvalidado' value=''>";
-                                         <input id='login' type='hidden' value='".$_SESSION['login']."' >";						   
-                     <li><a href='#'><span class='glyphicon glyphicon-user'></span> Bem vindo ".$_SESSION['login']."!</a></li>";
-                            
-                             if (isset($_SESSION["id_facebook"])){
-                                 
-                                  <li><a id='ASairViaFace' href='#'><span class='glyphicon glyphicon-log-out'></span> Sair</a></li>";
-    
-    
-    
-    
-                                  
+        </div>
+    </div>
    
-                             }else{
-                             
-                             <li><a href='index.php?sair=yes'><span class='glyphicon glyphicon-log-out'></span> Sair</a></li>";	    
-                             }
-                     
-                      
-                     } else{
-                    
-                     echo  "<li><a href='#' id='erro'><span class='glyphicon glyphicon-exclamation-sign'></span>" .$_SESSION['loginErro']."</a></li>";
-                    
-                     
-                   //  echo  "<li><a href='#' id='cadastrar'><span class='glyphicon glyphicon-user'></span> Cadastrar</a></li>";
-                     <li><a href='#' id='entrar'><span class='glyphicon glyphicon-log-in'></span> Entrar</a></li>";		      
-                     unset($_SESSION['login']);
-                      }?> -->
-                      <li><a href='#' id='entrarSair'><span class='glyphicon glyphicon-log-in'></span> Entrar</a></li>
-               </ul>
-               <!--Fim dos itens a direita -->				 
-            </div>
-         </div>
-      </nav>
-      <!--Fim nav -->
-      <!-- Box principal -->
-      <!--Mapa -->
-      <div id="map"></div>
-      <!--Fim Mapa -->
-      <br>
-      
-      <div class="rodape">
-      </div>
-      <!-- Div dos botoes  a esquerda: ache-me,etc -->	 
-      <div id="myBotoesEsq">		
-         <a  id="miniBtAcheme" href="#" class="btn btn-info btn-block">
-         <span class="glyphicon glyphicon-map-marker"></span>         
-         </a>
-        
-      </div>
-      <!-- Botão destino id="fazerViagem2" -->	 
-      <div id="btDestino">
-         <button type="button" id="fazerViagem2"  class="btn btn-primary btn-block btn-lg">Tudo ok? Informe destino...</button>	
-         <a href='pp.html'>Politica de Privacidade</a>
-         <br>	   
-         <a href='termosdoservico.html'>Termos legais e dos serviços</a>
-      </div>
-      <div id="bts">
-         <div id="btRapido" class="dropdownRapido">
-            <a id='btm' class="dropbtn btCSD">Rápido</a>
-            <div id="myDropdown" class="dropdownRapido-content">
-               <a href='#' id='distParaChamadasDiretas2' >Distancia e MAmigos</a>
-               <a href="#" id='escolhaMotorista'>Escolha Motorista</a>    
-            </div>
-         </div>
-         <div id="btLimpar"><br/><a href="#" class="btCSD">Limpar</a> </div>
-           
-         
-            <div id="DivfotoPas"> <img id="ImgFotoPas" width="50px" class="w3-circle"  alt="Passageiro" /> </div>
-       <!--   <?php echo '<script> if (document.getElementById("login"))  {     document.getElementById("ImgFotoPas").src=';echo "'".$_SESSION["url_foto"]."'";  echo ';}</script>';
-?> -->
-      
-      </div>
-      <!-- <div id="dxy" style="top:0px; width:100px; height:100px; z-index:10100"><div style="width:350%;"><img src="imgs/aba.jpg" width="100%" ><a href='https://play.google.com/store/apps/details?id=net.teletransporte.ttpassageiro' target="_blank"><img src="imgs/PeqttpPlayStore.jpg" alt="Baixar App TT Passageiros no Google Play" width="100%"></a><br>Baixar App TT Passageiros no Google Play<br> Em testes<div></div>  -->
-      <!-- Janela modal  generica -->
-      <div class="modal fade" id="janelaModal" tabindex="-1" role="dialog" aria-labelledby="tituloJanelaModal" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="tituloJanelaModal">Título</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>				  
-               </div>
-               <div id="conteudoModal" class="modal-body">
-                  local conteudo aqui	   				   
-               </div>
-               <div class="modal-footer">													  
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Painel motorista escolhido -->
-      <div  id="painelMotoristaEscolhido" class="container">
-         <div class="panel panel-primary">
-            <div id="cabPainelMotoristaEscolhido" class="panel-heading">Seu motorista</div>
-            <div id="conteudoPainelMotoristaEscolhido" class="panel-body">
-               <span>Nome:</span><em id="nomeMotoristaEscolhido"></em><br/>
-               <img class="foto"  src="imgs/sf.png" /><br/>
-               <button id="btContatoPainelMotoristaEscolhido" class="btn btn-primary" type="button">Contato(<span  id="contadorMsgs"></span>)</button> 
-               <button id="btCancelarPainelMotoristaEscolhido" class="btn btn-danger" type="button">Cancelar*</button>
-               <p>*Custo proporcional ao deslocamento feito at&eacute; voc&ecirc;.</p>
-               <p>&nbsp;</p>
-            </div>
-         </div>
-      </div>
-      <div class="modal fade" id="janelaModalChat" tabindex="-1" role="dialog" aria-labelledby="tituloJanelaModal" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content alturaMaxChat">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="tituloJanelaModal">Entre em contato</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>				  
-               </div>
-               <div id="conteudoModal" class="modal-body">
-                   
-                  <div id='chat' style='display:none;height:150px;overflow-y: scroll;' class="col-sm-3 col-sm-offset-4 frame centraliza" ><!-- class="col-sm-3 col-sm-offset-4 frame" -->
-                     <ul id='ull'></ul>
-                     
-                  </div>
-                  <div>
-                        <div class="msj-rtaAnt macroAnt">
-                           <div style="background:whitesmoke !important" class="text text-r" ><!--  -->
-                              <input class="mytext" placeholder="Digite uma mensagem"/>
-                             
-                                <span style="left:90%;top:-45px;" id="spSeta" class="glyphicon glyphicon-share-alt"></span>
-                                <!-- <div style="padding:10px;">
-                               </div> -->
-                           </div>
-                        </div>
-                        
-                     </div>
-                  
-               </div>
-               <div class="modal-footer">													  
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Modal Login -->
-      <div id="id01" class="modallogin">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h3 class="modal-title" id="tituloLogin">Login</h3>
-               <button type="button" onclick="document.getElementById('id01').style.display='none'" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span></button>				  
-            </div>
-            <!-- Modal Content -->
-            <form method="post" class="modal-contentLogin animate" action="/php/entraPas.php" >
-               <div class="imgcontainer">
-                  <img width="50px" class="foto" src="imgs/sf.png" alt="Avatar" />
-               </div>
-               <div>
-                
-                  <div id='contadorRegressivo'></div> 
-                <!-- <iframe id="lfFB" src="https://ttp-sandbox.drmoisessantos.com/fb.html" width="200" height="50" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" >
-                            <p>Your browser does not support iframes.</p>
-                            
-                  </iframe> -->
-                
-                   
-                  <br><br>
-                  <!-- <p>OU</p>
-                  <label for="login"><b>Login</b></label>
-                  <input type="text" inputmode="numeric" autocomplete="off" placeholder="Entre com CPF" name="login" required>
-                  </br>
-                  <label for="senha"><b>Senha</b></label>
-                  <input type="password" placeholder="Entre com a senha"  name="senha" required>
-                  </br> 
-                  </br>
-                  <button type="submit" class="btn btn-primary btn-lg" >Entrar</button>
-                  
-                  <label>
-                  <input type="checkbox" checked="checked" name="lembrar-me">Lembrar-me
-                  </label> 
-                  -->
-               </div>
-               <div>
-                  <br>	  
-                  <button type="button" id="fecharLogin" class="cancelbtn">Fechar</button>
-                  <!--
-                  </br>
-                  <span><a href='#' id="recSenha">Recuperar senha?</a></span>	
-                  </br>
-                  <span ><a href="#" onclick="cadastrar()" >Fazer cadastro</a></span>	
-                  </br>
-                  <p><a href="https://play.google.com/store/apps/details?id=net.teletransporte.ttm&hl=pt_BR" target="_blank" >Seja um motorista</a></p>
-                  -->
-                  
-               </div>
-               
-            </form>
-           
-            <div class="modal-footer">													  
-            </div>
-         </div>
-      </div>
-      <!-- Modal DivCam -->
-      <div id="DivCam" class="modallogin">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h3 class="modal-title" id="tituloLogin">Identificação por imagem</h3>
-               <button type="button" onclick="document.getElementById('DivCam').style.display='none'" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span></button>				  
-            </div>
-            <!-- Modal Content -->
-            <div>
-               <video id="video" width="320" height="240" preload autoplay loop muted ></video>
-               <canvas id="canvas" width="320" height="240"></canvas>
-            </div>
-            <div>
-               <button type="button" onclick="document.getElementById('DivCam').style.display='none'" class="cancelbtn">Fechar</button>
-               <button type="button"  class="btn btn-primary btn-lg" id="capture">Escolher motorista...</button>
-            </div>
-            <div class="modal-footer">													  
-            </div>
-         </div>
-      </div>
-      
-      <script        src="leaflet/leaflet.js">    </script>     	
-      <script        src="leaflet/leaflet-routing-machine.js"> </script>	
-      <!-- <script src="leaflet/leaflet-button-control.js"></script> -->	
-      <script src="leaflet/Control.Geocoder.js"></script>		
-      <script src="https://unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>		
-      <!-- <script src="js/jquery-1.10.2.min.js"></script>	-->
-      <script src="js/jquery-1.12.4.js"></script>  
-      <script src="js/jquery-ui.js">	</script>				  
-      <!-- Bootstrap -->     <script src="js/bootstrap.js"></script>	
-      <!-- Meus arquivos  - inicio dia 04/04/2018 hoje 07/06/2018 -->	javascript:void(0)
-      <script src="js/App.js"></script>	
-      <script src="js/Passageiro.js"></script>	
-      <script src="js/Corrida.js"></script>	
-      <script src="js/Motoristas.js"></script>	
-      <script src="js/status.js"></script>	
-      <script src="js/js001.js"></script>	
-      <script src="js/tracking-min.js"></script>
-      <script src="js/data/face-min.js"></script>
-      
-      
-   </body>
+	    
+	  
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="js/tracking-min.js"></script>
+
+    <script src="js/data/face-min.js"></script>
+	
+    <script type="text/javascript">
+        app.initialize();		
+    </script>
+	
+</body>
+
 </html>
