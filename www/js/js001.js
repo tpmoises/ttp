@@ -1,4 +1,4 @@
-//js001.jvarIHrChamDirs do App PASSAGEIRO Base
+﻿//js001.jvarIHrChamDirs do App PASSAGEIRO Base
 
 /* comuns */
 
@@ -33,6 +33,8 @@ var dataFinalPromocao=null;
 var urlBaseApp='https://ttp-sandbox.drmoisessantos.com/';//termina em /
 
 var idUsuarioFace=0;//gabiarra
+
+var segundaVezFace=false;// gabiarra- evita chamada tela loginassim que carrega
 
 
 
@@ -415,59 +417,15 @@ window.onload = function() { // Esta parte carrega depois que toda página html 
     try {
      
            //var uid=document.getElementById("IHIdfacebookNuvem").value;
-           if (verificaExistenciaSessao("uidNuvem")){//vem deo login facebook no arquivo fb.html via iframe
-              if (verificaExistenciaSessao("aux")){
-                     removeSessao("uidNuvem");
-                        removeSessao("aux");
-                        window.location.reload(true);
-                        
-              }else{
-                   criaAtualizaSessao("uid",recuperaSessao("uidNuvem"));//uid = uidNuvem
-                removeSessao("uidNuvem");
-                idUsuarioFace=recuperaSessao("uid");
-                 removeSessao("uid");
-              }
-               
-                
+           if (verificaExistenciaSessao("uidNuvem")){//
+                idUsuarioFace=recuperaSessao("uidNuvem");
            }else{
-               if (verificaExistenciaSessao("aux")){
-                   criaAtualizaSessao("uid",recuperaSessao("aux"));//uid = aux
-                   idUsuarioFace=recuperaSessao("aux");
-                   // removeSessao("aux");
-                    removeSessao("uid");
-               }else{//cria aux para recuperar uid quem fram seguro facebook
-                   
-                   var x=0;
-                   var achou=false;
-                   
-                   function timeout() {
-                       if (x<=20){
-                            setTimeout(function () {
-                             x++;    
-                             if (verificaExistenciaSessao("uidNuvem")){//aqui uid vem de frame que term rotina do facebook fb.hmtl
-                                criaAtualizaSessao("aux",recuperaSessao("uidNuvem"));//aux = uid
-                                 removeSessao("uidNuvem");
-                                acho=true;
-                                window.location.reload(true);
-                           }
-                           if (achou){
-                               return false;
-                           }else{
-                                timeout();
-                           }
-                           
-                        }, 1000);
-                       }
-                       
-                    }
-                    timeout();
-                
-               }
-              
-              
+              idUsuarioFace=0;
            }
-          
-           var url='https://ttp-sandbox.drmoisessantos.com/php/getDadosLoginPass.php?id_facebook='+idUsuarioFace;
+           var url=urlBaseApp;//temina em /
+            url += "php/getDadosLoginPass.php";
+            url+='?id_facebook='+idUsuarioFace;
+            
            $.get(url, function(r){//r  50;2084671180292295;Moises;https://graph.facebook.com/208467180292495/picture;1
             if ((r.trim() && (idUsuarioFace))){
                   r=r.split(';');
@@ -499,7 +457,9 @@ window.onload = function() { // Esta parte carrega depois que toda página html 
         });
 
 
-
+         document.getElementById("btLimpar").onclick=function(){
+             window.location.reload(true);
+         }
         
          document.getElementById("fecharLogin").onclick=function (){
                    document.getElementById('id01').style.display='none';
@@ -519,13 +479,15 @@ window.onload = function() { // Esta parte carrega depois que toda página html 
 
 
 
-            passageiro.setCodigo(document.getElementById("IHcodigo").value); //em index.php
+            passageiro.setCodigo(document.getElementById("IHcodigo").value); //em index. php
 
            
 
             //seta na memroria status
-
-            var url = '../php/pegaStatusPassBD.php?cod_passageiro=' + passageiro.getCodigo();
+             var url=urlBaseApp;//temina em /
+            url += "php/pegaStatusPassBD.php";
+                      
+             url += '?cod_passageiro=' + passageiro.getCodigo();
 
             $.get(url, function(r) {
                 
@@ -566,7 +528,9 @@ window.onload = function() { // Esta parte carrega depois que toda página html 
                     (passageiro.getStatus() != STATUS.getCodOnLine())) {
                      //pega codigo da corrida_corrente na tabela do passageiro
                      //pega status da corrida_corrente acima 
-                    var url = '../php/getCodStatusCorrCorrentePassageiro.php?cod_passageiro=' + passageiro.getCodigo();
+                      var url=urlBaseApp;//temina em /
+                      url += "php/getCodStatusCorrCorrentePassageiro.php";
+                     url += '?cod_passageiro=' + passageiro.getCodigo();
 
                     $.get(url, function(r1) { //Se o status é de que o passgaeiro tá em corrida entao pega codigo da corrida
                         r1=r1.split(",");
@@ -582,8 +546,10 @@ window.onload = function() { // Esta parte carrega depois que toda página html 
                         //se o status do passgeiro for de corrida 
 
                         //o codigo do mesmo está numa variável de sessaoPHP	
-
-                        url = '../php/pegaDadosSessaoBD.php'; //pega todos os dados da corrida
+                           /*  atencao redefinindo url */    
+                               url=urlBaseApp;//temina em /
+                               url += "php/pegaDadosSessaoBD.php";//pega todos os dados da corrida
+                        //url = '../php/pegaDadosSessaoBD. php'; 
 
                         url += "?cod_corrida=" + corrida.getCodigo();
 
@@ -609,9 +575,11 @@ window.onload = function() { // Esta parte carrega depois que toda página html 
 
                                 corrida.setPassageiro(r.corrida[0].cod_passageiro);
 
-
-
-                                url = '../php/getUmObjMotorista.php';
+                            /*  atencao redefinindo url */    
+                               url=urlBaseApp;//temina em /
+                               url += "php/getUmObjMotorista.php";
+                               
+                               // url = '../php/getUmObjMotorista.php';
 
                                 url += "?codigo=" + corrida.getMotorista();
 
@@ -771,7 +739,7 @@ window.onload = function() { // Esta parte carrega depois que toda página html 
 
         if (document.getElementById("ASairViaFace")) {
 
-            document.getElementById("ASairViaFace").onclick = verTelaLogin;
+           // document.getElementById("ASairViaFace").onclick = verTelaLogin;
 
         }
 
@@ -837,7 +805,7 @@ window.onload = function() { // Esta parte carrega depois que toda página html 
 
         document.getElementById("btm").onclick = myFunction3;
 
-        window.onclick = escondeMenu;
+       // window.onclick = escondeMenu;
 
 
 
@@ -1076,8 +1044,9 @@ function divMove(e) {
 
 
 function pegaStatusPassageiroNoBD(codigo) {
-
-    var url = '../php/pegaStatusPassBD.php?cod_passageiro=' + codigo;
+ var url=urlBaseApp;//temina em /
+    url += "php/pegaStatusPassBD.php";
+     url += '?cod_passageiro=' + codigo;
 
     $.get(url, function(r) {
 
@@ -1092,8 +1061,10 @@ function pegaStatusPassageiroNoBD(codigo) {
 
 
 function setaStatusPassageiroNoBD(codigo, Status) {
+    var url=urlBaseApp;//temina em /
+    url += "php/setaStatusPassBD.php";
 
-    var url = '../php/setaStatusPassBD.php?cod_passageiro=' + codigo + "&status=" + Status;
+     url += '?cod_passageiro=' + codigo + "&status=" + Status;
 
     $.get(url, function(r) {
 
@@ -1214,7 +1185,10 @@ function fChatPassageiro() {
 
 function loadChatEmUll() {
 
-    url = "../php/loadChat.php";
+  var url=urlBaseApp;//temina em /
+    url += "php/loadChat.php";
+    
+   // url = "../php/loadChat. php";
 
     var oldscrollHeight = $("#chat").attr("scrollHeight") - 20; //Scroll height before the request
 
@@ -1272,7 +1246,7 @@ function insertChat(who, texto, time) {
 
 
 
-    //	var url = "../php/updatChat.php?texto=" + texto + "?codigo=" + corrida.getCodigo();
+    //	var url = "../php/updatChat. php?texto=" + texto + "?codigo=" + corrida.getCodigo();
 
 
 
@@ -1289,8 +1263,10 @@ function insertChat(who, texto, time) {
 
 
     //abre/cria arquivo relacionado ao chat do servidor
-
-    url = '../php/mkLogChat.php';
+      var url=urlBaseApp;//temina em /
+    url += "php/mkLogChat.php";
+    
+    //url = '../php/mkLogChat. php';
 
     if (who == "me") {
 
@@ -1567,8 +1543,10 @@ function excluirContaEDados() {
 function excluirDefinitivamente() {
 
     var msg = 'Excluir conta e dados' + 'CodigoUsuarioPassageiro=' + passageiro.getCodigo();
-
-    url = '../php/enviarEmailFaleComigo.php?codigo=' + passageiro.getCodigo() + '&msg=' + msg;
+    var url=urlBaseApp;//temina em /
+    url += "php/enviarEmailFaleComigo.php";
+             
+    url += '?codigo=' + passageiro.getCodigo() + '&msg=' + msg;
 
     $.get(url, function(resultado) {
 
@@ -1676,13 +1654,16 @@ function enviarFaleConosco() {
     if (verEmail()) {
 
         if (passageiro.getCodigo()) {
-               var url = '../php/enviarEmailFaleComigo.php?codigo=' + passageiro.getCodigo() + '&msg=' + msg+'&email=' + document.getElementById("emailRecSenha").value;
+              var url=urlBaseApp;//temina em /
+             url += "php/enviarEmailFaleComigo.php";
+                url += '?codigo=' + passageiro.getCodigo() + '&msg=' + msg+'&email=' + document.getElementById("emailRecSenha").value;
                
-            //var url = '../php/enviarEmailFaleComigo.php?codigo=' + passageiro.getCodigo() + '&msg=' + msg+'&email=' + document.getElementById("emailRecSenha").value;
+            //var url = '../php/enviarEmailFaleComigo. php?codigo=' + passageiro.getCodigo() + '&msg=' + msg+'&email=' + document.getElementById("emailRecSenha").value;
 
         } else {
-
-            var url = '../php/enviarEmailFaleComigo.php?email=' + document.getElementById("emailRecSenha").value + '&msg=' + msg;
+             var url=urlBaseApp;//temina em /
+             url += "php/enviarEmailFaleComigo.php";
+             url += '?email=' + document.getElementById("emailRecSenha").value + '&msg=' + msg;
 
         }
 
@@ -1767,8 +1748,10 @@ function showValidacoes() {
             var celular = document.getElementById("IHcelular").value;
 
             var email = "";
-
-            $.get('../php/getEmailPassageiro.php?codigo=' + codigoP, function(resultado) {
+             var url=urlBaseApp;//temina em /
+             url += "php/getEmailPassageiro.php";
+     
+            $.get(url+'?codigo=' + codigoP, function(resultado) {
 
                 email = resultado;
 
@@ -1800,7 +1783,7 @@ function fazValidacoesEmailCel() {
 
         /*
 
-        $.get('../php/enviarEmail.php?codigo='+codigoP, function(resultado){
+        $.get('../php/enviarEmail. php?codigo='+codigoP, function(resultado){
 
         var avisoPassgeiro=[];
 
@@ -1808,7 +1791,7 @@ function fazValidacoesEmailCel() {
 
           var celular=soNumero(document.getElementById("IHcelular").value);
 
-           $.get( '../php/enviaCodToCel.php?numero_destino='+celular,
+           $.get( '../php/enviaCodToCel. php?numero_destino='+celular,
 
            function(resultado){
 
@@ -1844,9 +1827,10 @@ function confirmaVerificacao(id) {
 
     var cod_digitado = document.getElementById("codEnviado").value;
 
+   var url=urlBaseApp;//temina em /
+     url += "php/confVerificacao.php";
 
-
-    $.get("../php/confVerificacao.php?id=" + id + "&cod_digitado=" + cod_digitado, function(resultado) {
+    $.get(url+"?id=" + id + "&cod_digitado=" + cod_digitado, function(resultado) {
 
         alert(resultado);
 
@@ -1973,8 +1957,9 @@ function cadastrar() {
     //Não precisa do botão saidae ok
 
     //- mostraModal(titulo, conteudo,txtBtExit,txtBtOk,CallBackOk,txtObs,txtBtCancel,CallBackCancel)// 
-
-    mostraModal("", conteudo, "Fechar", "Cadastrar", fazCadastroPassageiro, "Operacão com chamadas diretas: você conhece o motorista!", false, false, "../php/cadastraPassageiro.php");
+     var url=urlBaseApp;//temina em /
+     url += "php/cadastraPassageiro.php";
+    mostraModal("", conteudo, "Fechar", "Cadastrar", fazCadastroPassageiro, "Operacão com chamadas diretas: você conhece o motorista!", false, false, url);
 
 }
 
@@ -2000,8 +1985,157 @@ function fazCadastroPassageiro() {
 
 function verTelaLogin() {
     //fFB();
-    document.getElementById('id01').style.display = 'block';
-    aguardaTempoFazAcao(30, function(){window.location.href='https://ttp-sandbox.drmoisessantos.com';},'contadorRegressivo');//ex.: 30,window.location.reload(true);
+ //   document.getElementById('id01').style.display = 'block';
+    
+function fFB() {
+
+   //id primeio app facebook 609463026453550
+// id app test1 com funcionalidades para avaliar (lista de amigos): 1940074352803565
+window.fbAsyncInit = function() {
+    "use strict";
+
+    FB.init({
+      appId      : '609463026453550',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v6.0'
+    });
+    //alert('fbAsyncInit')  ;
+   FB.AppEvents.logPageView();
+   // {"fields":"id,first_name,last_name,picture,friends"} para usar amigos do face-suspenso
+   function setGetDadosPassageiro(){
+            FB.api(
+          '/me',
+          'GET',
+           {"fields":"id,first_name,last_name,picture"},
+           function(response) {
+              
+               var url_foto="https://graph.facebook.com/" + response.id + "/picture";
+               /** var amigosFace='';//response.friends.data; suspenso em 30/03/2020 corona
+                   
+              
+                function criaIHamigosFace(amsFace){
+                   var varsSessaoAmigosFace;
+                   var virgula=",";
+                         varsSessaoAmigosFace="";
+                         for (var x=0;x<amsFace.length;x++){
+                             if(x==amsFace.length-1){
+                                 varsSessaoAmigosFace+=amsFace[x].id;
+                             }else{
+                                 varsSessaoAmigosFace+=amsFace[x].id+virgula;
+                             }
+                             
+                             
+                         }
+                         return varsSessaoAmigosFace;//string tipo "id,id..." dos amigos do face
+                     }
+                                
+               //alert(amigosFace); */
+               var StringIdAmigosFace='';//criaIHamigosFace(amigosFace) ;
+               if (!(response.id=='undefined')){
+                     var url=urlBaseApp;//temina em /
+                 url += "php/cadastraPassageiroViaFacebook.php";
+                    $.post(url, {//cadastra/pega dado passageiro
+                "id_facebook": response.id,            
+                "first_name": response.first_name,
+                 "last_name": response.last_name,
+                  "url_foto":url_foto,
+                  "StringIdAmigosFace":StringIdAmigosFace
+                 },
+                  function(r) {
+                       //quando os dados do passageiro vêm do face são cadastros ou atualizados
+                        criaAtualizaSessao("uidNuvem",response.id);
+                        window.location.reload(true);
+                }); 
+               }else{
+                  // alert(response.id);
+                   //window.location.href = 'https://teletransporte.net';
+               }
+                                     }
+             );
+       //     FB.api('/me/friends',{ fields: 'name,id' }, function(r) {
+     //alert(r.name); }); //.. it only has two values name and id. 
+   }
+   if (verificaExistenciaSessao("uidNuvem")){
+       
+        FB.getLoginStatus(function(response) {
+         if (response.status === 'connected') {
+             var uid = response.authResponse.userID;
+             var accessToken = response.authResponse.accessToken;
+             FB.logout(function(response1) {
+                 removeSessao("uidNuvem");
+                 if (verificaExistenciaSessao("uidNuvem")){
+                     criaAtualizaSessao("erro","Erro ao sair em FB.logout");
+                      window.location.reload(true);
+                 }else{
+                     window.location.reload(true);
+                 }
+                 
+          // user is now logged out
+              });
+               console.log('is connected');
+         } else if (response.status === 'not_authorized') {
+             console.log('not_authorized');
+         } else {
+             console.log('is not logged');
+          
+         }
+     }); 
+       
+       
+   }else{
+           
+            FB.login(function(response) {
+
+                            
+                            // criaAtualizaSessao dentor de  setGetDadosPassageiro();
+                            setGetDadosPassageiro();
+
+
+                         }, {
+
+                             scope: 'public_profile'
+
+                         }); // escopo de recuros utilizados no facebook user_friends suspenso corona virus e falatado autorizacao facebook 
+   
+   
+  
+       }
+      
+                         
+
+   FB.Event.subscribe('auth.login', function(response){ //Ocorre quando loga via facebook       
+          // setGetDadosPassageiro();  
+      
+     });
+ 
+ 
+     FB.Event.subscribe('auth.logout', function(response){ //Ocorre quando loga via facebook    
+  
+  //    FB.login(function(response) {
+            // Original FB.login code
+       //     }, { auth_type: 'reauthenticate' });
+      
+     });
+   
+    
+       
+    };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+       
+
+
+}
+    fFB();
+     
+   // aguardaTempoFazAcao(300, function(){window.location.href='https://ttp-sandbox.drmoisessantos.com';},'contadorRegressivo');//ex.: 30,window.location.reload(true);
    // resetaSeLogout();
 
 
@@ -2521,7 +2655,9 @@ try {//ero aqui
         txtPesq = txtPesq.replace(/\s{1,}/g, '');
         txtPesq=txtPesq.toUpperCase();
             var cidade = cityAutoPassageiro();
-           var url = "../php/getDadosPromocao.php?codMotorista="+app.motorista.getCodigo()+"&codAlafanumericoPromocao=" + txtPesq;
+              var url=urlBaseApp;//temina em /
+                
+            url += "php/getDadosPromocao.php?codMotorista="+app.motorista.getCodigo()+"&codAlafanumericoPromocao=" + txtPesq;
         try {
                 ajaxObj = new ActiveXObject("Microsoft.XMLHTTP");
 
@@ -3784,7 +3920,7 @@ function setGraphMotoristas(getDezMotProximos, motoristaEscolhidoDiretamente, ST
 
             if (latLng != null) {
                 var url=urlBaseApp;//temina em /
-                 url += "../php/buscarMotoristas.php";
+                 url += "php/buscarMotoristas.php";
 
                 if (STATUSmot == undefined) {
 
@@ -4063,7 +4199,7 @@ function setGraphMotoristas(getDezMotProximos, motoristaEscolhidoDiretamente, ST
 
                                                     }
 
-                                                } else { //Zero prq é o primeiro de acordo com criterios de buuscaMotoristas.php
+                                                } else { //Zero prq é o primeiro de acordo com criterios de buuscaMotoristas. php
 
                                                     //  var markerArray = [];//lista somente o motorista escolhido se ainda tiver dissponível
 
@@ -5348,8 +5484,9 @@ function corridaGetStatus(tempoSegundos, proximoMotoristaP) { //Pega Status no B
             }
 
             if (corrida.getCodigo() != null) {
-
-                var url = "../php/verificaStatusCorrida.php?cod_corrida=" + corrida.getCodigo();
+                 var url=urlBaseApp;//temina em /
+                 url += "php/verificaStatusCorrida.php";
+                 url += "?cod_corrida=" + corrida.getCodigo();
 
                 n++;
 
@@ -5577,8 +5714,9 @@ function corridaGetStatus(tempoSegundos, proximoMotoristaP) { //Pega Status no B
                         passageiro.setStatus(STATUS.getCodOnLine());
 
                         // setaStatusPassageiroNoBD(passageiro.getCodigo(),STATUS.getCodOnLine())		    		     
-
-                        var url = '../php/setaStatusPassBD.php?cod_passageiro=' + passageiro.getCodigo() + "&status=" + STATUS.getCodOnLine();
+                        var url=urlBaseApp;//temina em /
+                         url += "php/setaStatusPassBD.php";
+                         url += '?cod_passageiro=' + passageiro.getCodigo() + "&status=" + STATUS.getCodOnLine();
 
                         $.get(url, function(r) {
 
@@ -5604,8 +5742,11 @@ function corridaGetStatus(tempoSegundos, proximoMotoristaP) { //Pega Status no B
                         passageiro.setStatus(STATUS.getCodCorrDirCancM());
 
                         // setaStatusPassageiroNoBD(passageiro.getCodigo(),STATUS.getCodOnLine())		    		     
-
-                        var url = '../php/setaStatusPassBD.php?cod_passageiro=' + passageiro.getCodigo() + "&status=" + STATUS.getCodOnLine();
+                        
+                        var url=urlBaseApp;//temina em /
+                         url += "php/setaStatusPassBD.php";
+                         
+                         url += '?cod_passageiro=' + passageiro.getCodigo() + "&status=" + STATUS.getCodOnLine();
 
                         $.get(url, function(r) {
 
@@ -5636,8 +5777,9 @@ function corridaGetStatus(tempoSegundos, proximoMotoristaP) { //Pega Status no B
                         setaStatusPassageiroNoBD(passageiro.getCodigo(), STATUS.getCodOnLine());
                          
                         if (n * tempoSegundos >= tempoEsperarMotorista) {
-
-                            var url2 = "../php/verificaStatusMotorista.php?codigo=" + app.motorista.getCodigo();
+                             var url2=urlBaseApp;//temina em /
+                             url2 += "php/verificaStatusMotorista.php";
+                             url2 += "?codigo=" + app.motorista.getCodigo();
 
                             $.get(url2, function(resultado) {
 
@@ -5710,8 +5852,10 @@ function corridaGetStatus(tempoSegundos, proximoMotoristaP) { //Pega Status no B
                         if (n * tempoSegundos >= tempoEsperarMotorista) { //deve ser 30
 
                             if (proximoMotorista < motoristas.length) {
-
-                                var url2 = "../php/verificaStatusMotorista.php?codigo=" + app.motorista.getCodigo();
+                               var url2=urlBaseApp;//temina em /
+                             url2 += "php/verificaStatusMotorista.php";
+                             
+                                 url2 += "?codigo=" + app.motorista.getCodigo();
 
                                 $.get(url2, function(resultado) {
 
@@ -5728,8 +5872,10 @@ function corridaGetStatus(tempoSegundos, proximoMotoristaP) { //Pega Status no B
                                     //paga o status do motorista e salvO em outro campo	
 
                                     //NÃO DESTRUTIVA. Ou seja, o que foi salvo continua lá até outro salvamento sobrepor.
-
-                                    url = "../php/restauraStatusMotorista.php?cod_motorista=" + codAux;
+                                     var url=urlBaseApp;//temina em /
+                                     url += "php/restauraStatusMotorista.php";
+                                    
+                                    url += "?cod_motorista=" + codAux;
 
                                     //UPDATE app_motoristas SET status = status_anterior
 
@@ -5782,8 +5928,10 @@ function corridaGetStatus(tempoSegundos, proximoMotoristaP) { //Pega Status no B
                                         //tem que ser pegos aqui prq podem terem sido atualizados
 
                                         //ja seta as variáveis de sessao
-
-                                        var url = "../php/pegaCamposConfMotorista.php?codigo=" + codMotorista;
+                                         var url=urlBaseApp;//temina em /
+                                          url += "php/pegaCamposConfMotorista.php";
+                                        
+                                         url += "?codigo=" + codMotorista;
 
                                         $.get(url, function(r) {
 
@@ -5918,8 +6066,9 @@ function calculaCustoTotalEmPassageiro() {
         removeSessao('b'); //usado para posicao MostraTelaCorrida	
 
         var codigo_corrida = corrida.getCodigo();
-
-        var url = "../php/getCoordsViagem.php";
+        var url=urlBaseApp;//temina em /
+        url += "php/getCoordsViagem.php";
+       
 
         $.post(url,
 
@@ -6152,15 +6301,18 @@ function atualizaPosicaoMotorista2(c) {
 
     if (c) {
 
+         var url=urlBaseApp;//temina em /
+        url += "php/getUltPosicaoMotorista.php";
 
-
-        var url = "../php/getUltPosicaoMotorista.php?cod_corrida=" + c;
+         url = "?cod_corrida=" + c;
 
 
 
     } else {
-
-        var url = "../php/getUltPosicaoMotorista.php?cod_corrida=" + corrida.getCodigo();
+        var url=urlBaseApp;//temina em /
+        url += "php/getUltPosicaoMotorista.php";
+       
+         url += "?cod_corrida=" + corrida.getCodigo();
 
     }
 
@@ -6250,15 +6402,19 @@ function atualizaPosicaoMotorista(c) {
 
     if (c) {
 
-
-
-        var url = "../php/get3UltPosicaoMotorista.php?cod_corrida=" + c;
+      
+           var url=urlBaseApp;//temina em /
+        url += "php/get3UltPosicaoMotorista.php";
+        
+         url = "?cod_corrida=" + c;
 
 
 
     } else {
-
-        var url = "../php/get3UltPosicaoMotorista.php?cod_corrida=" + corrida.getCodigo();
+          var url=urlBaseApp;//temina em /
+        url += "php/get3UltPosicaoMotorista.php";
+        
+         url = "?cod_corrida=" + corrida.getCodigo();
 
     }
 
@@ -6411,8 +6567,10 @@ function myAlert(idErroLocalMsgErro, msg) {
 
 
 function setaStatusCorridaNoBD(cod_corrida, Status) {
+       var url=urlBaseApp;//temina em /
+        url += "php/setaStatusCorrida.php";
 
-    url = "../php/setaStatusCorrida.php?cod_corrida=" + cod_corrida + "&status=" + Status;
+    url += "?cod_corrida=" + cod_corrida + "&status=" + Status;
 
     $.get(url, function(resultado) {})
 
@@ -6430,7 +6588,10 @@ function salvaStatus(codigoMotorista, StatusQueVemdoBD) {
 
     if (StatusQueVemdoBD[0] != '1') {
 
-        url = "../php/salvaStatusMotorista.php?cod_motorista=" + codigoMotorista;
+         var url=urlBaseApp;//temina em /
+        url += "php/salvaStatusMotorista.php";
+
+        url += "?cod_motorista=" + codigoMotorista;
 
         //UPDATE app_motoristas SET status_anterior = status
 
@@ -6449,8 +6610,10 @@ function restauraStatus(codigoMotorista, StatusQueVemdoBD) {
     //paga o status do motorista e salvO em outro campo	
 
     //NÃO DESTRUTIVA. Ou seja, o que foi salvo continua lá até outro salvamento sobrepor.
-
-    url = "../php/restauraStatusMotorista.php?cod_motorista=" + codigoMotorista;
+   var url=urlBaseApp;//temina em /
+        url += "php/restauraStatusMotorista.php";
+        
+    url += "?cod_motorista=" + codigoMotorista;
 
     //UPDATE app_motoristas SET status = status_anterior
 
@@ -6752,8 +6915,11 @@ function fEscolhaMotorista() {
 
 
         if (!corrida.getCodigo()) {
+            
+              var url=urlBaseApp;//temina em /
+        url += "php/buscarMotoristas.php";
 
-            var url = "../php/buscarMotoristas.php";
+           // var url = "../php/buscarMotoristas. php";
 
             url += "?codPassageiro=" + passageiro.getCodigo() + "&condAmizade=" + selecaoAmizade + "&raioChamDir=" + raioChamDir + "&lat=" + latLng.lat + "&lng=" + latLng.lng + "&status=" + STATUS.getCodOnLine();
 
@@ -6893,7 +7059,7 @@ function fEscolhaMotorista() {
 
                 //mostraModal(titulo, conteudo,txtBtExit,txtBtOk,CallBackOk,txtObs,txtBtCancel,CallBackCancel,urlFormPost){//se txtBtOk não for passado o botão ok não aparece.	
 
-                mostraModal(titulo, conteudo, "Fechar", false, false, "Analise o motorista mais adequado", false, false, false, false, false, "../imgs/blcMedePapai2020.jpeg");
+                mostraModal(titulo, conteudo, "Fechar", false, false, "Analise o motorista mais adequado", false, false, false, false, false, urlBaseApp+"imgs/blcMedePapai2020.jpeg");
 
                 espereCarregandoRequisicao(false);
 
@@ -6912,7 +7078,7 @@ function fEscolhaMotorista() {
 
     } else {
 
-        verTelaLogin();
+       verTelaLogin();
 
         // cam(); rotina para chamada via imagem
 
@@ -7001,8 +7167,10 @@ function confDistChamDireta() {
 function situacaoAmizade(codPassageiro, codMotorista) {
 
     try {
+           var url=urlBaseApp;//temina em /
+        url += "php/situacaoDeAmizade.php";
 
-        var url = '../php/situacaoDeAmizade.php?codPassageiro=' + codPassageiro + "&codMotorista=" + codMotorista;
+         url += '?codPassageiro=' + codPassageiro + "&codMotorista=" + codMotorista;
 
         $.get(url, function(resultado) {
 
@@ -7060,8 +7228,10 @@ function situacaoAmizade(codPassageiro, codMotorista) {
 function alternaAmizadePara(amizade, codPassageiro, codMotorista) {
 
     if (passageiro.getLogin()) {
+        var url=urlBaseApp;//temina em /
+        url += "php/altAmizade.php";
 
-        var url = "../php/altAmizade.php?amizade=" + amizade + "&codPassageiro=" + codPassageiro + "&codMotorista=" + codMotorista;
+         url += "?amizade=" + amizade + "&codPassageiro=" + codPassageiro + "&codMotorista=" + codMotorista;
 
         //(url,txtEspera,functionCallBack)
 
@@ -7108,7 +7278,7 @@ function alternaAmizadePara(amizade, codPassageiro, codMotorista) {
 
     } else {
 
-        verTelaLogin()
+       verTelaLogin()
 
     }
 
@@ -7158,8 +7328,9 @@ function onDbClickMarcaMotorista(e) {
                 //tem que ser pegos aqui prq podem terem sido atualizados
 
                 //ja seta as variáveis de sessao
-
-                var url = "../php/pegaCamposConfMotorista.php?codigo=" + codMotorista;
+                 var url=urlBaseApp;//temina em /
+                 url += "php/pegaCamposConfMotorista.php"; 
+                 url += "?codigo=" + codMotorista;
 
                 $.get(url, function(r) {
 
@@ -7386,7 +7557,7 @@ function escolheMotoristaEspecfico(evento, tipoCHAMADA, tipoCORRIDA, codCorridaJ
 
             //setaStatusComoChamando tambem cria registro inicial da Corrida e retorna o código da mesma
 
-            var url = "";
+             var url=urlBaseApp;//temina em /
            $(jm).modal('hide');
 
             //  alert("Posicao Motorista: "+motoristaEscolhidoDiretamente.getPosicao()); 
@@ -7406,8 +7577,10 @@ function escolheMotoristaEspecfico(evento, tipoCHAMADA, tipoCORRIDA, codCorridaJ
 
 
             if (passageiro.getLogin()) { //so seta se estive logado
+                 //var url=urlBaseApp;//temina em /
+                 url += "php/verificaStatusMotorista.php"; 
 
-                url = "../php/verificaStatusMotorista.php?codigo=" + motoristaEscolhidoDiretamente.getCodigo();
+                url += "?codigo=" + motoristaEscolhidoDiretamente.getCodigo();
 
                 $.get(url, function(resultado) {
 
@@ -7424,14 +7597,18 @@ function escolheMotoristaEspecfico(evento, tipoCHAMADA, tipoCORRIDA, codCorridaJ
                         //$_SESSION['codigoCorrida'] definda no arquivo abaixo
 
                         if (!codCorridaJaInserida) {//codCorridaJaInserida-> parametro
-
-                            var urlBase = "../php/insereCorrida.php";
+                              var url=urlBaseApp;//temina em /
+                            url += "php/insereCorrida.php"; 
+                           var  urlBase = url;
 
                             url = "";
 
                         } else {
-
-                            var urlBase = "../php/atualizaCorrida.php?codigoCorrida=" + codCorridaJaInserida;
+                             var url=urlBaseApp;//temina em /
+                              url += "php/atualizaCorrida.php"; 
+                            var urlBase =url+ "?codigoCorrida=" + codCorridaJaInserida;
+                            
+                               urlBase = url;
 
                             url = "";
 
@@ -7594,8 +7771,8 @@ function escolheMotoristaEspecfico(evento, tipoCHAMADA, tipoCORRIDA, codCorridaJ
                        //url += "&url_dominio_app_motorista=" + "https://ttp-sandbox.drmoisessantos.com";//ou quando for código producao/beta http
 
                         try {
-
-                            $.get('../php/getTipoAmizade.php?codPassageiro=' + corrida.getPassageiro() + '&codMotorista=' + corrida.getMotorista(), function(tipoAmizade) {
+                            //urlBaseApp termina em /
+                            $.get(urlBaseApp+'php/getTipoAmizade.php?codPassageiro=' + corrida.getPassageiro() + '&codMotorista=' + corrida.getMotorista(), function(tipoAmizade) {
 
                                 if (tipoAmizade.trim() == '1') {
 
@@ -7622,7 +7799,7 @@ function escolheMotoristaEspecfico(evento, tipoCHAMADA, tipoCORRIDA, codCorridaJ
 
 
 
-                                    urlBase = "../php/setaStatusComoChamando.php"; //do Motorista no BD do Motorista e CAMPO corrida_corrente
+                                    urlBase = urlBaseApp+"php/setaStatusComoChamando.php"; //do Motorista no BD do Motorista e CAMPO corrida_corrente
 
                                     url = ""; //Reseta url - IMPORTANTE
 
@@ -7649,13 +7826,13 @@ function escolheMotoristaEspecfico(evento, tipoCHAMADA, tipoCORRIDA, codCorridaJ
 
                                     //Atualiza status motorista para chamaNdo e CAMPO corrida_corrente:
 
-
-
+                                     
+                                   
                                     $.get(urlBase + url, function(resultado) {
 
                                         // Depois de setar o motorista como chamando, insere codigo corrida corrente na tabela do passageiro
 
-                                        urlBase = "../php/setCorrCorentePassageiro.php";
+                                        urlBase =  urlBaseApp +"php/setCorrCorentePassageiro.php";
 
                                         url = ""; //Reseta url - IMPORTANTE
 
@@ -7696,7 +7873,7 @@ function escolheMotoristaEspecfico(evento, tipoCHAMADA, tipoCORRIDA, codCorridaJ
                             });
 
                         } catch (e) {
-                            alert("Erro no ajax getTipoAmizade.php" + e.message)
+                            alert("Erro no ajax getTipoAmizade.p hp" + e.message)
                         }
 
 
@@ -7829,8 +8006,11 @@ function getDadosMotMaisPerto(classificacaoMot) {
         //tem que ser pegos aqui prq podem terem sido atualizados
 
         //ja seta as variáveis de sessao
-
-        var url = "../php/pegaCamposConfMotorista.php?codigo=" + codMotorista;
+         var url=urlBaseApp;//termina em "/"
+        url += "php/pegaCamposConfMotorista.php";
+                     
+        
+         url += "?codigo=" + codMotorista;
 
         $.get(url, function(r) {
 
@@ -10746,62 +10926,7 @@ function mostraDialogo(mensagem, tipo, tempo) {
 
 
 
-function fsairViaFace() {
 
-    window.fbAsyncInit = function() {
-
-        FB.init({
-
-            appId: '609463026453550',
-
-            cookie: true,
-
-            xfbml: true,
-
-            version: 'v6.0'
-
-        });
-
-
-
-        FB.AppEvents.logPageView();
-
-
-
-
-        (function(d, s, id) {
-
-            var js, fjs = d.getElementsByTagName(s)[0];
-
-            if (d.getElementById(id)) {
-                return;
-            }
-
-            js = d.createElement(s);
-            js.id = id;
-
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-
-            fjs.parentNode.insertBefore(js, fjs);
-
-        }(document, 'script', 'facebook-jssdk'));
-
-
-
-
-        FB.logout(function(response) {
-
-
-
-        });
-
-        $.post('/index.php?sair=yes', {}, function(r2) {})
-
-
-
-    }
-
-}
 
 //ASairViaFace
 
@@ -10980,7 +11105,7 @@ function saveFileJson(text, filename) {
     var a = document.createElement('a');
     a.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(tags));
     a.setAttribute('Download', filename);
-    //$.get('../php/criaJsonEnd.php?conteudoJson=data:text/plain;charset=utf-8,'+encodeURIComponent(text),function(r){});
+    //$.get('../php/criaJsonEnd. php?conteudoJson=data:text/plain;charset=utf-8,'+encodeURIComponent(text),function(r){});
     a.click();
 }
 //var obj = {a: "Hello", b: "World"};
@@ -11113,7 +11238,7 @@ function apagaAtribDeElemOsm(osmXml, elemento, atributo) {
 function salvaArqOsm(arqXML) {
   //  CreateXmlElement();
 
-    xmlhttp.open("POST", "salvaArqOsm.php", true);
+    xmlhttp.open("POST", "salvaArqOsm. php", true);
     xmlhttp.setRequestHeader("Accept", "text/xml");
     xmlhttp.send(xmlDoc);
 }
@@ -11185,7 +11310,7 @@ try{
 	        acao();
 	    }catch(e3){alert(e3.message)}
 	    
-	//	window.open('../controllers/logout.php', '_self');
+	//	window.open('../controllers/logout. php', '_self');
 	}
    }catch(e){alert(e.message)}
 }
