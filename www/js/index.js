@@ -34,29 +34,32 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		try{
+		 window.plugins.insomnia.keepAwake(); //plugun que faz app não apagar tela
+                 //window.plugins.insomnia.allowSleepAgain() funçao apar autorizar voltar ao modo ocioso
+			
 		document.addEventListener("resume", onResume, false);	
 		//app.receivedEvent('deviceready');
 	  
 		var iab = cordova.InAppBrowser;	
 	        try{
-	 BackgroundGeolocation.configure({
-     locationProvider: BackgroundGeolocation.DISTANCE_FILTER_PROVIDER,
-     desiredAccuracy: 0,
-     stationaryRadius: 10,
-     distanceFilter: 0,
-     notificationTitle: 'TeleTransporte.net',
-     notificationText: 'em segundo plano',
-     debug: false,	
-     interval: 5000,
-	 fastestInterval:2500,
-	 notificationEnabled:true,
-	 startForeground:true,
-	 noticationIconColor:'#5cb85c',
-     maximumAge:0 //esta opcao ou
-    // enableHighAccuracy:true 
-     //maxAge:0	// esta opcao  ? depois que coloque esta paerece que travou.Observar
+        	 BackgroundGeolocation.configure({
+             locationProvider: BackgroundGeolocation.DISTANCE_FILTER_PROVIDER,
+             desiredAccuracy: 0,
+             stationaryRadius: 10,
+             distanceFilter: 0,
+             notificationTitle: 'TeleTransporte.net',
+             notificationText: 'em segundo plano',
+             debug: false,	
+             interval: 5000,
+        	 fastestInterval:2500,
+        	 notificationEnabled:true,
+        	 startForeground:true,
+        	 noticationIconColor:'#5cb85c',
+             maximumAge:0 //esta opcao ou
+            // enableHighAccuracy:true 
+             //maxAge:0	// esta opcao  ? depois que coloque esta paerece que travou.Observar
   }); 
-  }	catch (eConf) {{alert("Erro na funÃ§Ã£o configuracoes  de onDeviceReady: "+eConf.message)}}
+  }	catch (eConf) {{alert("Erro na função configuracoes  de onDeviceReady: "+eConf.message)}}
 		 try{
   BackgroundGeolocation.on('authorization', function(status) {
     console.log('[INFO] BackgroundGeolocation authorization status: ' + status);
@@ -85,11 +88,7 @@ var app = {
   });
   
    BackgroundGeolocation.start();
-			
-        //  alert('aqui');	
-         
-//         navigator.camera;
-         cam()	;
+       //  cam()	;
 	       iab.open('https://teletransporte.net', '_self','location=no');  	
 		}catch(e){alert(e.message)}
         
@@ -103,7 +102,7 @@ var app = {
 	   //window.open = cordova.InAppBrowser.open();
        // listeningElement.setAttribute('style', 'display:none;');
        // receivedElement.setAttribute('style', 'display:block;');
-        //window.location.replace("https://teletransporte.net");
+        //window.location.replace("https://ttp-sandbox.drmoisessantos.com");
        // console.log('Received Event: ' + id);
     }
 	 
@@ -111,8 +110,7 @@ var app = {
 function onResume() {
 try{	
    var iab = cordova.InAppBrowser;	
-        //  alert('aqui');		
-	       iab.open('https://teletransporte.net', '_self','location=no');  
+	       //iab.open('https://teletransporte.net', '_self','location=no');  
 }catch(e){alert(e.message)}
 }
 
@@ -213,4 +211,3 @@ function cam(){
     
     
     }
-  
