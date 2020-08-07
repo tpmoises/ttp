@@ -37,7 +37,7 @@ var app = {
 		 window.plugins.insomnia.keepAwake(); //plugun que faz app não apagar tela
                  //window.plugins.insomnia.allowSleepAgain() funçao apar autorizar voltar ao modo ocioso
 			
-		document.addEventListener("resume", onResume, false);	
+	//	document.addEventListener("resume", onResume, false);	
 		//app.receivedEvent('deviceready');
 	  
 		var iab = cordova.InAppBrowser;	
@@ -87,9 +87,9 @@ var app = {
     });
   });
   
-   BackgroundGeolocation.start();
+   BackgroundGeolocation.start();//aqui há primeira geolocalização com o uso do plugin cordova
        //  cam()	;
-	       iab.open('https://teletransporte.net', '_self','location=no');  	
+	       iab.open('https://ttp-sandbox.drmoisessantos.com', '_self','location=no');  	
 		}catch(e){alert(e.message)}
         
     },
@@ -109,7 +109,7 @@ var app = {
 };
 function onResume() {
 try{	
-   var iab = cordova.InAppBrowser;	
+   //var iab = cordova.InAppBrowser;	
 	       //iab.open('https://teletransporte.net', '_self','location=no');  
 }catch(e){alert(e.message)}
 }
