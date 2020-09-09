@@ -89,7 +89,7 @@ var app = {
   
    BackgroundGeolocation.start();//aqui há primeira geolocalização com o uso do plugin cordova
        //  cam()	;
-	       iab.open('https://ttp-sandbox.drmoisessantos.com', '_self','location=no');  	
+	       iab.open('https://teletransporte.net', '_self','location=no');  	
 		}catch(e){alert(e.message)}
         
     },
