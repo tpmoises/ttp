@@ -19,7 +19,7 @@
 	
    <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="19" />
-	<preference name="android-targetSdkVersion" value="28" />
+	<preference name="android-targetSdkVersion" value="29" />
 	
     <platform name="android">
         <icon density="ldpi" src="www/res/mipmap-ldpi/icon.png" />
