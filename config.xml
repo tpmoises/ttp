@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="net.teletransporte.ttpassageiro" version="0.0.63" versionCode="63" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="net.teletransporte.ttpassageiro" version="0.0.64" versionCode="64" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0">
 	<name>TTP</name>
     <description>
        Primeira versao teste alpha 0.001 TeleTransporte Passageiro (ttp).	
@@ -114,6 +114,9 @@
     <plugin name="cordova-plugin-battery-status" spec="~1.2.4" />
     <plugin name="cordova-plugin-camera" spec="~2.4.1" />
     <plugin name="cordova-plugin-device" spec="~1.1.6" />
+	
+    <plugin name="cordova-plugin-media-capture" spec="~3.0.3" />	
+	
     <plugin name="cordova-plugin-dialogs" spec="~1.3.3" />
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
     <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
