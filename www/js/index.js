@@ -34,6 +34,11 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		try{
+		var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+                var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+                var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;	 
+                const recognition = new SpeechRecognition();
+			
 		 window.plugins.insomnia.keepAwake(); //plugun que faz app não apagar tela
                  //window.plugins.insomnia.allowSleepAgain() funçao apar autorizar voltar ao modo ocioso
 			
