@@ -1,35 +1,4 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
  
-@tpmoises 
-tpmoises
-/
-ttp
-0
-00
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-More
-ttp/www/js/index.js /
-@tpmoises
-tpmoises up reconheciemnto de voz t
-…
-Latest commit 429b593 on 3 Dec 2020
- History
- 1 contributor
-218 lines (186 sloc)  7.69 KB
-  
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
