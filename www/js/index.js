@@ -99,10 +99,10 @@ var app = {
 	   if (verificaExistenciaSessao("p1")){		    
 		   document.getElementById("deviceready").style.display='none';
 		   // alert(navigator.device.capture);	
-			navigator.camera.cleanup(onSuccessClear, onFailClear);
+		//navigator.camera.cleanup(onSuccessClear, onFailClear);
 
 			function onSuccessClear() {
-				console.log("Camera cleanup success.")
+				alert("Camera cleanup success.")
 			}
 
 			function onFailClear(message) {
@@ -118,7 +118,8 @@ var app = {
 				sourceType: srcType,
 				encodingType: Camera.EncodingType.JPEG,
 				mediaType: Camera.MediaType.PICTURE,
-				allowEdit: true,
+				allowEdit: false,
+				targetWidth:200,
 				correctOrientation: true
 			   }
 				return options;
@@ -141,7 +142,7 @@ var app = {
 
 					displayImage(imageUri);
 					// You may choose to copy the picture, save it somewhere, or upload.
-					func(imageUri);
+				    //func(imageUri);
 
 				}, function cameraError(error) {
 					console.debug("Unable to obtain picture: " + error, "app");
@@ -231,104 +232,6 @@ try{
 }catch(e){alert(e.message)}
 }
 
-function cam(){
-  /*
-    document.getElementById('DivCam').style.display='block';
-    const video = document.getElementById('video')
-    
-    const canvas = document.getElementById('canvas')
-    
-    const context = canvas.getContext('2d')
-    
-    const tracker = new tracking.ObjectTracker('face')
-    
-    tracking.track('#video', tracker, {camera: true})	
-    tracker.on('track', event => {
-    
-    console.log(event)
-    
-     context.clearRect(0,0,canvas.width, canvas.height )
-    
-    event.data.forEach( rect => {
-    
-      context.strokeStyle = '#ff0000'
-  
-          context.lineWidth = 2
-  
-          context.strokeRect(rect.x-20, rect.y-20, rect.width+20, rect.height+20)
-  
-          context.fillText(`x: ${rect.x}, w: $:{rect.width}`, rect.x+rect.width+20, rect.y+20)
-  
-          context.fillText(`y: ${rect.y}, h: $:{rect.height}`, rect.x+rect.width+20, rect.y+40)
-  
-    
-    }) 
-    
-    })
-    */
-    try{
-      
-      document.getElementById('DivCam').style.display = 'block';
-  var video = document.getElementById('video');
-  var canvas = document.getElementById('canvas');
-  var context = canvas.getContext('2d');
-  var tracker = new tracking.ObjectTracker('face');
-  
-  tracking.initUserMedia_ = function(element, opt_options) {
-    window.navigator.mediaDevices.enumerateDevices().then(function(devices) {
-    let cfg={
-      video:{'facingMode':'user'}, 
-      audio: (opt_options && opt_options.audio) ? true : false,
-    };
-    devices = devices.filter(function(device) { return device.kind === 'videoinput'});
-    if (navigator.userAgent.toLowerCase().indexOf("android") > 0) {
-      for (let i = 0; i < devices.length; i++) {
-        let device = devices[i];
-        if (device.label) {
-          if (device.label.split(',')[1]==' facing front'){
-            cfg={
-              video:{ 
-                deviceId: {'exact':device.deviceId},
-              },
-              audio: (opt_options && opt_options.audio) ? true : false ,
-            };
-            break;
-          }
-        }
-      }
-    }
-    window.navigator.mediaDevices.getUserMedia(cfg).then(function(stream) {
-      element.srcObject = stream;
-    }).catch(function(err) {
-      throw Error('Cannot capture user camera.');
-    });
-  });
-  };
-  
-  
-
-  tracking.track('#video', tracker, {
-    camera: true
-  });
-  tracker.on('track', function (event) {
-    console.log(event);
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    event.data.forEach(function (rect) {
-      context.strokeStyle = '#ff0000';
-      context.lineWidth = 2;
-      context.strokeRect(rect.x - 20, rect.y - 20, rect.width + 20, rect.height + 20);
-      context.fillText("x: ".concat(rect.x, ", w: $:{rect.width}"), rect.x + rect.width + 20, rect.y + 20);
-      context.fillText("y: ".concat(rect.y, ", h: $:{rect.height}"), rect.x + rect.width + 20, rect.y + 40);
-    });
-  });
-    }catch(e){
-      alert("erro na function Cam :  "+e.message);
-    }
-  
-    
-    
-    }
-	
 function get_par_url (){
 	var query = location.search.slice(1);
 	var partes = query.split('&');
