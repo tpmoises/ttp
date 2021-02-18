@@ -96,7 +96,7 @@ var app = {
    BackgroundGeolocation.start();//aqui há primeira geolocalização com o uso do plugin cordova
        //  cam()	;
 	   //,'mediaPlaybackRequiresUserAction=yes','shouldPauseOnSuspend=yes','useWideViewPort=yes'
-	   if (verificaExistenciaSessao("le_qrcode")){		    
+	   if (verificaExistenciaSessao("p1")){		    
 		   document.getElementById("deviceready").style.display='none';
 		    alert(navigator.device.capture);
 			setTimeout(function(){
