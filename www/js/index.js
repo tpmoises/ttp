@@ -100,7 +100,7 @@ var app = {
 		   document.getElementById("deviceready").style.display='none';
 		    alert(navigator.device.capture);
 			setTimeout(function(){
-				removeSessao("le_qrcode");
+				removeSessao("p1");
 				 location.reload();		
 			},10000);
 	   }else{
