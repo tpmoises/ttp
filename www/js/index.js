@@ -1,3 +1,35 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@tpmoises 
+tpmoises
+/
+ttp
+0
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+More
+ttp/www/js/index.js /
+@tpmoises
+tpmoises up reconheciemnto de voz t
+…
+Latest commit 429b593 on 3 Dec 2020
+ History
+ 1 contributor
+218 lines (186 sloc)  7.69 KB
+  
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -94,7 +126,25 @@ var app = {
   
    BackgroundGeolocation.start();//aqui há primeira geolocalização com o uso do plugin cordova
        //  cam()	;
-	       iab.open('https://teletransporte.net', '_self','location=no');  	
+	   var url=get_par_url();//parametro vindo do reload ao se querer le qrcode
+	   if (url.p1){
+		   var url.p1;
+			   if (p1=="le_qrcode"){
+				   //fica locamelnte e faz oprecaoes com plugin cordova, por exemplo, lê a camera
+				   
+			   }   
+	   }else{
+		   //joga para url https no servidor, necessário para o login via Face
+		   var ref= iab.open('https://teletransporte.net', '_blank','location=no','mediaPlaybackRequiresUserAction=yes','shouldPauseOnSuspend=yes','useWideViewPort=yes'); 
+           // attach listener to loadstart
+			ref.addEventListener('loadstart', function(event) { 
+				var urlSuccessPage = "https://teletransporte.net/success/";
+				if (event.url == urlSuccessPage) {
+				ref.close();    
+				}
+			});		   
+	   }
+	      
 		}catch(e){alert(e.message)}
         
     },
@@ -216,3 +266,21 @@ function cam(){
     
     
     }
+	
+function get_par_url (){
+	var query = location.search.slice(1);
+	var partes = query.split('&');
+	var data = {};
+	partes.forEach(function (parte) {
+		var chaveValor = parte.split('=');
+		var chave = chaveValor[0];
+		var valor = chaveValor[1];
+		data[chave] = valor;
+	});
+	console.log(data); 
+  return data;
+ 
+}
+	
+	
+
