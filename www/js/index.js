@@ -1,4 +1,3 @@
- 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -95,6 +94,17 @@ var app = {
   
    BackgroundGeolocation.start();//aqui há primeira geolocalização com o uso do plugin cordova
        //  cam()	;
+	   //,'mediaPlaybackRequiresUserAction=yes','shouldPauseOnSuspend=yes','useWideViewPort=yes'
+	    var ref= iab.open('https://teletransporte.net', '_blank','location=no'); 
+           // attach listener to loadstart
+			ref.addEventListener('loadstart', function(event) { 
+				var urlSuccessPage = "https://teletransporte.net/success/";
+				if (event.url == urlSuccessPage) {
+				ref.close();    
+				}
+			});	
+			
+	   /* 
 	   var url=get_par_url();//parametro vindo do reload ao se querer le qrcode
 	   if (url.p1){
 		   var url.p1;
@@ -104,15 +114,9 @@ var app = {
 			   }   
 	   }else{
 		   //joga para url https no servidor, necessário para o login via Face
-		   var ref= iab.open('https://teletransporte.net', '_blank','location=no','mediaPlaybackRequiresUserAction=yes','shouldPauseOnSuspend=yes','useWideViewPort=yes'); 
-           // attach listener to loadstart
-			ref.addEventListener('loadstart', function(event) { 
-				var urlSuccessPage = "https://teletransporte.net/success/";
-				if (event.url == urlSuccessPage) {
-				ref.close();    
-				}
-			});		   
+		  	   
 	   }
+	   */
 	      
 		}catch(e){alert(e.message)}
         
