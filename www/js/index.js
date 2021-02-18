@@ -98,7 +98,64 @@ var app = {
 	   //,'mediaPlaybackRequiresUserAction=yes','shouldPauseOnSuspend=yes','useWideViewPort=yes'
 	   if (verificaExistenciaSessao("p1")){		    
 		   document.getElementById("deviceready").style.display='none';
-		    alert(navigator.device.capture);
+		   // alert(navigator.device.capture);	
+			navigator.camera.cleanup(onSuccessClear, onFailClear);
+
+			function onSuccessClear() {
+				console.log("Camera cleanup success.")
+			}
+
+			function onFailClear(message) {
+				alert('Failed because: ' + message);
+			}
+            
+			function setOptions(srcType) {
+			  var options = {
+				// Some common settings are 20, 50, and 100
+				quality: 50,
+				destinationType: Camera.DestinationType.FILE_URI,
+				// In this app, dynamically set the picture source, Camera or photo gallery
+				sourceType: srcType,
+				encodingType: Camera.EncodingType.JPEG,
+				mediaType: Camera.MediaType.PICTURE,
+				allowEdit: true,
+				correctOrientation: true
+			   }
+				return options;
+			}
+			
+			// Show image
+			//
+			function cameraCallback(imageData) {
+			   var image = document.getElementById('myImage');
+			   image.src = "data:image/jpeg;base64," + imageData;
+			}
+			
+			function openCamera(selection) {
+
+				var srcType = Camera.PictureSourceType.CAMERA;
+				var options = setOptions(srcType);
+				var func = createNewFileEntry;
+
+				navigator.camera.getPicture(function cameraSuccess(imageUri) {
+
+					displayImage(imageUri);
+					// You may choose to copy the picture, save it somewhere, or upload.
+					func(imageUri);
+
+				}, function cameraError(error) {
+					console.debug("Unable to obtain picture: " + error, "app");
+
+				}, options);
+			}
+			
+			function displayImage(imgUri) {
+			  var elem = document.getElementById('myImage');
+			  elem.src = imgUri;
+		  }
+          
+	         openCamera();
+			 
 			setTimeout(function(){
 				removeSessao("p1");
 				 location.reload();		
