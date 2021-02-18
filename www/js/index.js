@@ -1,3 +1,4 @@
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -95,14 +96,30 @@ var app = {
    BackgroundGeolocation.start();//aqui há primeira geolocalização com o uso do plugin cordova
        //  cam()	;
 	   //,'mediaPlaybackRequiresUserAction=yes','shouldPauseOnSuspend=yes','useWideViewPort=yes'
-	    var ref= iab.open('https://teletransporte.net', '_blank','location=no'); 
+	   if (verificaExistenciaSessao("le_qrcode")){		    
+		   document.getElementById("deviceready").style.display='none';
+		    alert(navigator.device.capture);
+			setTimeout(function(){
+				removeSessao("le_qrcode");
+				 location.reload();		
+			},10000);
+	   }else{
+		   var ref= iab.open('https://teletransporte.net', '_blank','location=no'); 
            // attach listener to loadstart
 			ref.addEventListener('loadstart', function(event) { 
 				var urlSuccessPage = "https://teletransporte.net/success/";
 				if (event.url == urlSuccessPage) {
-				ref.close();    
+				 //verificaExistenciaSessao(id)   criaAtualizaSessao(id,sessao)  recuperaSessao(id) removeSessao(id)
+				 criaAtualizaSessao("p1","le_qrcode");
+				//window.p1 = 'le_qrcode'; 	
+				 ref.close();  
+                 location.reload();				
+				//alert(window.p1);
+                				
 				}
-			});	
+			});	 
+	   }
+	   
 			
 	   /* 
 	   var url=get_par_url();//parametro vindo do reload ao se querer le qrcode
@@ -256,4 +273,105 @@ function get_par_url (){
 }
 	
 	
+
+  function criaAtualizaSessao(id, informacao) {
+
+      var Storage = window.localStorage;
+
+      if (typeof(Storage) !== "undefined") {
+
+          if (informacao) {
+
+              Storage.setItem(id, informacao);
+
+              console.log("Em criaAtualizaSessao: Sessao " + id + " valor: " + informacao + " criada!")
+
+          } else {
+
+              console.log("Em criaAtualizaSessao: Sessao " + id + " valor: " + informacao + " Nao criada!")
+
+          }
+
+
+
+      } else {
+
+          alert("Desculpe! No Web Storage support..em criaAtualizaSessao");
+
+      }
+
+  }
+
+
+
+  function verificaExistenciaSessao(id) {
+
+      var Storage = window.localStorage;
+
+      if ((Storage.getItem(id)) && (Storage.getItem(id) != undefined)) {
+
+          console.log("Em verificaExistenciaSessao: Sessao " + id + " existe! Vale:" + Storage.getItem(id));
+
+          return true;
+
+      } else {
+
+          console.log("Em verificaExistenciaSessao:Sessao " + id + " NAO existe ou indefinido!");
+
+          return false;
+
+      }
+
+
+
+  }
+
+
+
+  function recuperaSessao(id) {
+
+      var Storage = window.localStorage;
+
+      if (typeof(Storage) !== "undefined") {
+
+          if ((Storage.getItem(id)) && (Storage.getItem(id) != undefined)) {
+
+              //  console.log("Em recuperaSessao: Sessao " + id + " recuperada: " + Storage.getItem(id))
+
+              return Storage.getItem(id);
+
+          }
+
+      } else {
+
+          alert("Desculpe! No Web Storage support.. em recuperaSessao");
+
+      }
+
+  }
+
+
+
+  function removeSessao(id) {
+
+      var Storage = window.localStorage;
+
+      if (typeof(Storage) !== "undefined") {
+
+          if (Storage.getItem(id)) {
+
+              console.log("Em removeSessao: Sessao de ID " + id + " será apagada: " + Storage.getItem(id))
+
+              Storage.removeItem(id);
+
+          }
+
+      } else {
+
+          alert("Desculpe! No Web Storage support.. emremoveSessao");
+
+      }
+
+  }
+
 
