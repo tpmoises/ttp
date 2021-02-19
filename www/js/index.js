@@ -115,7 +115,7 @@ var app = {
                                 "Cancelled: " + result.cancelled);
                             removeSessao("p1");
 							
-							var ref=iab.open('https://teletransporte.net/?qrcode=' + result.text, result.text, '_blank', 'location=yes');
+							var ref=iab.open('https://teletransporte.net/?qrcode=' + result.text,  '_blank', 'location=yes');
                             
                             //criaAtualizaSessao("qrcode",result.text);
                             ref.addEventListener('loaderror', loadErrorCallBack);
