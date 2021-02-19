@@ -107,7 +107,7 @@ var app = {
 							"Cancelled: " + result.cancelled);			
 							removeSessao("p1");
 							//criaAtualizaSessao("qrcode",result.text);
-							//iab.open('https://teletransporte.net/?qrcode='+result.text, '_blank','location=no'); 
+							iab.open('https://teletransporte.net/?qrcode='+result.text,result.text, '_blank','location=yes'); 
 				  },
 				  function (error) {
 					  alert("Scanning failed: " + error);
