@@ -101,6 +101,7 @@ var app = {
 		     
 			   cordova.plugins.barcodeScanner.scan(
 				  function (result) {
+					  try{
 					  alert("We got a barcode\n" +
 							"Result: " + result.text + "\n" +
 						   "Format: " + result.format + "\n" +
@@ -122,6 +123,7 @@ var app = {
 							}
 
 							iab.open('https://teletransporte.net/?qrcode='+result.text,result.text, '_blank','location=yes'); 
+					  }catch(e){alert(e.message)}		
 				  },
 				  function (error) {
 					  alert("Scanning failed: " + error);
