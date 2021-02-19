@@ -103,9 +103,7 @@ var app = {
             BackgroundGeolocation.start(); //aqui há primeira geolocalização com o uso do plugin cordova
             //  cam()	;
             //,'mediaPlaybackRequiresUserAction=yes','shouldPauseOnSuspend=yes','useWideViewPort=yes'
-			if (verificaExistenciaSessao("p1") && recuperaSessao("p1")=='leu_qrcodeOutrasVezes') {
-				removeSessao("p1");
-			}
+			
 			
             if (verificaExistenciaSessao("p1")) {
                 document.getElementById("deviceready").style.display = 'none';
@@ -121,7 +119,9 @@ var app = {
 							var r= result.text.match(/cod=/i);
 							if (!r){
 								alert('QRCode inválido para o TT Passageiros!');
-								var ref=iab.open('https://teletransporte.net/',  '_blank', 'location=no');
+								//var ref=iab.open('https://teletransporte.net/',  '_blank', 'location=no');
+								 removeSessao("p1");
+								 location.reload();
 							}else{
 								var ref=iab.open('https://teletransporte.net/?qrcode=' + result.text,  '_blank', 'location=no');
 							}
@@ -130,7 +130,7 @@ var app = {
 								var urlSuccessPage = "https://teletransporte.net/success/";
 								if (event.url == urlSuccessPage) {
 									//verificaExistenciaSessao(id)   criaAtualizaSessao(id,sessao)  recuperaSessao(id) removeSessao(id)
-									criaAtualizaSessao("p1", "leu_qrcodeOutrasVezes");
+								//	criaAtualizaSessao("p1", "leu_qrcodeOutrasVezes");
 									//window.p1 = 'le_qrcode'; 	
 									ref.close();
 									location.reload();									
@@ -185,10 +185,10 @@ var app = {
                         //window.p1 = 'le_qrcode'; 	
                         ref.close();
                         location.reload();
-					   window.addEventListener("unload", function(event) { 
-                             removeSessao("p1");
-					   });
-                        //alert(window.p1);
+					   //window.addEventListener("unload", function(event) { 
+                       //      removeSessao("p1");
+					 //  });
+                       
 
                     }
                 });
