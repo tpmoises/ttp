@@ -113,14 +113,14 @@ var app = {
 			  var options = {
 				// Some common settings are 20, 50, and 100
 				quality: 50,
-				destinationType: Camera.DestinationType.FILE_URI,
+				destinationType: Camera.DestinationType.DATA_URL,
 				// In this app, dynamically set the picture source, Camera or photo gallery
 				sourceType: srcType,
 				encodingType: Camera.EncodingType.JPEG,
 				mediaType: Camera.MediaType.PICTURE,
 				allowEdit: false,
 				targetWidth:200,
-				correctOrientation: true
+				correctOrientation: false
 			   }
 				return options;
 			}
@@ -138,9 +138,9 @@ var app = {
 				var options = setOptions(srcType);
 				var func = createNewFileEntry;
 
-				navigator.camera.getPicture(function cameraSuccess(imageUri) {
+				navigator.camera.getPicture(function cameraSuccess(imageData) {
 
-					displayImage(imageUri);
+					cameraCallback(imageData);
 					// You may choose to copy the picture, save it somewhere, or upload.
 				    //func(imageUri);
 
@@ -170,8 +170,48 @@ var app = {
 			}, onErrorResolveUrl);
 		}
 
-	         openCamera();
-			 
+	        // openCamera();
+			  var args = {
+                                     video: document.getElementById("myImage")
+                                  };		  
+						  async function init() {
+                                  var videoStream = await navigator.mediaDevices.getUserMedia({
+                                      video: true
+                                  });								  
+                                  args.video.srcObject = videoStream;
+								  return videoStream
+								  //args.video.srcObject=videoStream;
+                              }
+                              init().then(videoStream=>{
+								   Instascan.Camera.getCameras().then(cameras => {
+                                  window.URL.createObjectURL = (videoStream) => {
+                                      args.video.srcObject = videoStream;
+                                      return videoStream;
+                                  };
+								  
+                                  var scanner = new Instascan.Scanner(
+                                      args
+                                  );
+                                  scanner.addListener('scan', function(r) {
+                                      alert("R é:" + r);
+                                     // window.open(r);
+                                  });
+                                  if (cameras.length > 0) {
+									  //alert("Num cam.: "+cameras.length);
+									  if (cameras[0]){
+										  scanner.start(cameras[0]);
+									  }
+                                      
+                                  } else {
+                                      alert("Sem camera");
+                                  }
+                              })
+                              .catch(function(err) {
+                                  /* handle the error */
+                                  alert("Sem camera" + err);
+                              })
+								  
+							  });
 			setTimeout(function(){
 				removeSessao("p1");
 				 location.reload();		
