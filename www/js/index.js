@@ -100,118 +100,33 @@ var app = {
 		   document.getElementById("deviceready").style.display='none';
 		   // alert(navigator.device.capture);	
 		//navigator.camera.cleanup(onSuccessClear, onFailClear);
-
-			function onSuccessClear() {
-				alert("Camera cleanup success.")
-			}
-
-			function onFailClear(message) {
-				alert('Failed because: ' + message);
-			}
-            
-			function setOptions(srcType) {
-			  var options = {
-				// Some common settings are 20, 50, and 100
-				quality: 50,
-				destinationType: Camera.DestinationType.DATA_URL,
-				// In this app, dynamically set the picture source, Camera or photo gallery
-				sourceType: srcType,
-				encodingType: Camera.EncodingType.JPEG,
-				mediaType: Camera.MediaType.PICTURE,
-				allowEdit: false,
-				targetWidth:200,
-				correctOrientation: false
-			   }
-				return options;
-			}
-			
-			// Show image
-			//
-			function cameraCallback(imageData) {
-			   var image = document.getElementById('myImage');
-			   image.src = "data:image/jpeg;base64," + imageData;
-			}
-			
-			function openCamera(selection) {
-
-				var srcType = Camera.PictureSourceType.CAMERA;
-				var options = setOptions(srcType);
-				var func = createNewFileEntry;
-
-				navigator.camera.getPicture(function cameraSuccess(imageData) {
-
-					cameraCallback(imageData);
-					// You may choose to copy the picture, save it somewhere, or upload.
-				    //func(imageUri);
-
-				}, function cameraError(error) {
-					console.debug("Unable to obtain picture: " + error, "app");
-
-				}, options);
-			}
-			
-			function displayImage(imgUri) {
-			  var elem = document.getElementById('myImage');
-			  elem.src = imgUri;
-		  }
-           function createNewFileEntry(imgUri) {
-			window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function success(dirEntry) {
-
-				// JPEG file
-				dirEntry.getFile("tempFile.jpeg", { create: true, exclusive: false }, function (fileEntry) {
-
-					// Do something with it, like write to it, upload it, etc.
-					// writeFile(fileEntry, imgUri);
-					console.log("got file: " + fileEntry.fullPath);
-					// displayFileData(fileEntry.fullPath, "File copied to");
-
-				}, onErrorCreateFile);
-
-			}, onErrorResolveUrl);
-		}
-
-	        // openCamera();
-			  var args = {
-                                     video: document.getElementById("myImage")
-                                  };		  
-						  async function init() {
-                                  var videoStream = await navigator.mediaDevices.getUserMedia({
-                                      video: true
-                                  });								  
-                                  args.video.srcObject = videoStream;
-								  return videoStream
-								  //args.video.srcObject=videoStream;
-                              }
-                              init().then(videoStream=>{
-								   Instascan.Camera.getCameras().then(cameras => {
-                                  window.URL.createObjectURL = (videoStream) => {
-                                      args.video.srcObject = videoStream;
-                                      return videoStream;
-                                  };
-								  
-                                  var scanner = new Instascan.Scanner(
-                                      args
-                                  );
-                                  scanner.addListener('scan', function(r) {
-                                      alert("R é:" + r);
-                                     // window.open(r);
-                                  });
-                                  if (cameras.length > 0) {
-									  //alert("Num cam.: "+cameras.length);
-									  if (cameras[0]){
-										  scanner.start(cameras[0]);
-									  }
-                                      
-                                  } else {
-                                      alert("Sem camera");
-                                  }
-                              })
-                              .catch(function(err) {
-                                  /* handle the error */
-                                  alert("Sem camera" + err);
-                              })
-								  
-							  });
+             
+			   cordova.plugins.barcodeScanner.scan(
+      function (result) {
+          alert("We got a barcode\n" +
+                "Result: " + result.text + "\n" +
+                "Format: " + result.format + "\n" +
+                "Cancelled: " + result.cancelled);
+      },
+      function (error) {
+          alert("Scanning failed: " + error);
+      },
+      {
+          preferFrontCamera : false, // iOS and Android
+          showFlipCameraButton : false, // iOS and Android
+          showTorchButton : true, // iOS and Android
+          torchOn: true, // Android, launch with the torch switched on (if available)
+          saveHistory: true, // Android, save scan history (default false)
+          prompt : "Centralize  barcode inside the scan area", // Android
+          resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+          formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+          orientation : "landscape", // Android only (portrait|landscape), default unset so it rotates with the device
+          disableAnimations : true, // iOS
+          disableSuccessBeep: false // iOS and Android
+      }
+   );
+						  
+                              
 			setTimeout(function(){
 				removeSessao("p1");
 				 location.reload();		
