@@ -108,7 +108,8 @@ var app = {
            //     "Format: " + result.format + "\n" +
             //    "Cancelled: " + result.cancelled);			
 				removeSessao("p1");
-				iab.open('https://teletransporte.net?qrcode='+result.text, '_blank','location=no'); 
+				criaAtualizaSessao("qrcode",result.text);
+				iab.open('https://teletransporte.net', '_blank','location=no'); 
       },
       function (error) {
           alert("Scanning failed: " + error);
@@ -129,10 +130,10 @@ var app = {
    );
 						  
                               
-			setTimeout(function(){
+			/* setTimeout(function(){
 			//	removeSessao("p1");
 				 location.reload();		
-			},10000);
+			},10000); */
 	   }else{
 		   var ref= iab.open('https://teletransporte.net', '_blank','location=no'); 
            // attach listener to loadstart
