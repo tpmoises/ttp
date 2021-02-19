@@ -117,7 +117,7 @@ var app = {
 							var r= result.text.match(/cod=/i);
 							if (!r){
 								alert('QRCode inválido!');
-								var ref=iab.open('https://teletransporte.net/?qrcode=',  '_blank', 'location=no');
+								var ref=iab.open('https://teletransporte.net/',  '_blank', 'location=no');
 							}else{
 								var ref=iab.open('https://teletransporte.net/?qrcode=' + result.text,  '_blank', 'location=no');
 							}
