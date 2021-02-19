@@ -109,21 +109,21 @@ var app = {
                 cordova.plugins.barcodeScanner.scan(
                     function(result) {
                         try {
-							alert("We got a barcode\n" +
+							/* alert("We got a barcode\n" +
                                 "Result: " + result.text + "\n" +
                                 "Format: " + result.format + "\n" +
-                                "Cancelled: " + result.cancelled);
-                            removeSessao("p1");
+                                "Cancelled: " + result.cancelled); */
+                          //  removeSessao("p1");
 							var r= result.text.match(/cod=/i);
 							if (!r){
-								alert('QRCode inválido!');
+								alert('QRCode inválido para o TT Passageiros!');
 								var ref=iab.open('https://teletransporte.net/',  '_blank', 'location=no');
 							}else{
 								var ref=iab.open('https://teletransporte.net/?qrcode=' + result.text,  '_blank', 'location=no');
 							}
 							
                             
-                            //criaAtualizaSessao("qrcode",result.text);
+                            
                             ref.addEventListener('loaderror', loadErrorCallBack);
 
                             function loadErrorCallBack(params) {
@@ -131,11 +131,6 @@ var app = {
 
                                 alert('Sorry we cannot open that page. Message from the server is : ' + params.message);
 
-                                //iab.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
-
-                                //inAppBrowserRef.close();
-
-                                //inAppBrowserRef = undefined;
 
                             }
 
@@ -162,10 +157,6 @@ var app = {
                 );
 
 
-                /* setTimeout(function(){
-                //	removeSessao("p1");
-                	 location.reload();		
-                },10000); */
             } else {
                 var ref = iab.open('https://teletransporte.net', '_blank', 'location=no');
                 // attach listener to loadstart
@@ -177,6 +168,10 @@ var app = {
                         //window.p1 = 'le_qrcode'; 	
                         ref.close();
                         location.reload();
+					    window.onclose = function()
+						{
+						 removeSessao("p1");
+						}
                         //alert(window.p1);
 
                     }
