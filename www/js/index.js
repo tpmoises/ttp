@@ -114,8 +114,14 @@ var app = {
                                 "Format: " + result.format + "\n" +
                                 "Cancelled: " + result.cancelled);
                             removeSessao("p1");
+							var r= result.text.match(/cod=/i);
+							if (!r){
+								alert('QRCode inválido!');
+								var ref=iab.open('https://teletransporte.net/?qrcode=',  '_blank', 'location=no');
+							}else{
+								var ref=iab.open('https://teletransporte.net/?qrcode=' + result.text,  '_blank', 'location=no');
+							}
 							
-							var ref=iab.open('https://teletransporte.net/?qrcode=' + result.text,  '_blank', 'location=yes');
                             
                             //criaAtualizaSessao("qrcode",result.text);
                             ref.addEventListener('loaderror', loadErrorCallBack);
@@ -146,7 +152,7 @@ var app = {
                         showTorchButton: true, // iOS and Android
                         torchOn: true, // Android, launch with the torch switched on (if available)
                         saveHistory: true, // Android, save scan history (default false)
-                        prompt: "Centralize  o QRCode dentro da área", // Android
+                        prompt: "Scaneie o QRCode do MOTORISTA", // Android
                         resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
                         formats: "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
                         orientation: "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
