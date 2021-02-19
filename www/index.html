@@ -35,7 +35,17 @@
 	
 	
 	<!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://teletransporte.net https://api.mapbox.com https://nominatim.openstreetmap.org; child-src blob: ; script-src 'self' data: https://teletransporte.net 'unsafe-inline' 'unsafe-eval' https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js https://nominatim.openstreetmap.org ; style-src 'self' data: 'unsafe-inline' https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css; media-src 'self'; font-src 'self' https://teletransporte.net; img-src * data: blob: ; connect-src  'self' https://teletransporte.net  https://api.mapbox.com  https://nominatim.openstreetmap.org ws://localhost:3000" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://teletransporte.net https://api.mapbox.com https://nominatim.openstreetmap.org; 
+	
+	child-src blob:  https://*.drmoisessantos.com; 
+	
+	script-src 'self' data: https://ttm.drmoisessantos.com https://teletransporte.net 'unsafe-inline' 'unsafe-eval' https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js https://nominatim.openstreetmap.org ; 
+	
+	style-src 'self' data: 'unsafe-inline' https://ttm.drmoisessantos.com https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css; media-src 'self'; 
+	
+	font-src 'self' https://teletransporte.net; img-src * data: blob: ; 
+	
+	connect-src  'self'  https://*.drmoisessantos.com  https://ttm.drmoisessantos.com  https://teletransporte.net  https://api.mapbox.com  https://nominatim.openstreetmap.org ws://localhost:3000" />
     <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
