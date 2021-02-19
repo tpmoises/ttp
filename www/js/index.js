@@ -103,10 +103,12 @@ var app = {
              
 			   cordova.plugins.barcodeScanner.scan(
       function (result) {
-          alert("We got a barcode\n" +
-                "Result: " + result.text + "\n" +
-                "Format: " + result.format + "\n" +
-                "Cancelled: " + result.cancelled);
+        //  alert("We got a barcode\n" +
+          //      "Result: " + result.text + "\n" +
+           //     "Format: " + result.format + "\n" +
+            //    "Cancelled: " + result.cancelled);			
+				removeSessao("p1");
+				iab.open('https://teletransporte.net?qrcode='+result.text, '_blank','location=no'); 
       },
       function (error) {
           alert("Scanning failed: " + error);
@@ -120,7 +122,7 @@ var app = {
           prompt : "Centralize  barcode inside the scan area", // Android
           resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
           formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-          orientation : "landscape", // Android only (portrait|landscape), default unset so it rotates with the device
+          orientation : "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
           disableAnimations : true, // iOS
           disableSuccessBeep: false // iOS and Android
       }
@@ -128,7 +130,7 @@ var app = {
 						  
                               
 			setTimeout(function(){
-				removeSessao("p1");
+			//	removeSessao("p1");
 				 location.reload();		
 			},10000);
 	   }else{
