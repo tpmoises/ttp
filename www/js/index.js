@@ -107,6 +107,20 @@ var app = {
 							"Cancelled: " + result.cancelled);			
 							removeSessao("p1");
 							//criaAtualizaSessao("qrcode",result.text);
+							iab.addEventListener('loaderror', loadErrorCallBack);
+							function loadErrorCallBack(params) {
+								
+								
+								   alert('Sorry we cannot open that page. Message from the server is : '+ params.message);
+
+								//iab.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
+
+								//inAppBrowserRef.close();
+
+								//inAppBrowserRef = undefined;
+
+							}
+
 							iab.open('https://teletransporte.net/?qrcode='+result.text,result.text, '_blank','location=yes'); 
 				  },
 				  function (error) {
