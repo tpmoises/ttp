@@ -125,8 +125,8 @@ var app = {
 							}else{
 								var ref=iab.open('https://teletransporte.net/?qrcode=' + result.text,  '_blank', 'location=no');
 							}
-							
-                            ref.addEventListener('loadstart', function(event) {
+							if (ref){
+								ref.addEventListener('loadstart', function(event) {
 								var urlSuccessPage = "https://teletransporte.net/success/";
 								if (event.url == urlSuccessPage) {
 									//verificaExistenciaSessao(id)   criaAtualizaSessao(id,sessao)  recuperaSessao(id) removeSessao(id)
@@ -142,6 +142,8 @@ var app = {
 							});
                             
                             ref.addEventListener('loaderror', loadErrorCallBack);
+							}
+                            
 
                             function loadErrorCallBack(params) {
 
