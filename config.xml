@@ -129,7 +129,7 @@
 	
 	<plugin name="phonegap-plugin-barcodescanner" />
 	
-	<plugin name="com.aserputko.speech.speechrecognition2" spec="0.1.0" source="pgb" />
+	
 	
     <engine name="android" spec="~7.1.0" />
     <engine name="browser" spec="^5.0.4" />
