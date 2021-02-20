@@ -123,7 +123,9 @@ var app = {
 								 removeSessao("p1");
 								 location.reload();
 							}else{
-								var ref=iab.open('https://teletransporte.net/?qrcode=' + result.text,  '_blank', 'location=no');
+								//exemplo de qrcode valido cod=6&nome=moises&sobrenome=santos&celular=8496707763
+								//obrigatorio somente cod=
+								var ref=iab.open('https://teletransporte.net/?' + result.text,  '_blank', 'location=no');
 							}
 							if (ref){
 								ref.addEventListener('loadstart', function(event) {
@@ -133,11 +135,7 @@ var app = {
 								//	criaAtualizaSessao("p1", "leu_qrcodeOutrasVezes");
 									//window.p1 = 'le_qrcode'; 	
 									ref.close();
-									location.reload();									
-									 
-									
-								
-
+									location.reload();
 								}
 							});
                             
